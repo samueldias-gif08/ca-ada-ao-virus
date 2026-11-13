@@ -1,0 +1,64 @@
+{
+    "suites":  {
+                   "education":  {
+                                     "total":  59,
+                                     "failed":  [
+
+                                                ]
+                                 },
+                   "networkCollapse":  {
+                                           "total":  32,
+                                           "failed":  [
+
+                                                      ]
+                                       },
+                   "mouseControls":  {
+                                         "total":  41,
+                                         "failed":  [
+
+                                                    ]
+                                     }
+               },
+    "browserTests":  [
+                         {
+                             "test":  "Desktop mostra quatro alternativas sem interface de verdadeiro ou falso",
+                             "passed":  true
+                         },
+                         {
+                             "test":  "Botões usam Marcellus e alvo confortável",
+                             "passed":  true
+                         },
+                         {
+                             "test":  "Clique real em A conclui com 500 pontos",
+                             "passed":  true
+                         },
+                         {
+                             "test":  "Enunciados longos e alternativas cabem na largura do celular",
+                             "passed":  true
+                         },
+                         {
+                             "test":  "Toque em B erra sem descontar vidas",
+                             "passed":  true
+                         },
+                         {
+                             "test":  "Tela baixa permite alcançar D por rolagem interna",
+                             "passed":  true
+                         },
+                         {
+                             "test":  "Fase final reutiliza as quatro alternativas e preserva o título",
+                             "passed":  true
+                         },
+                         {
+                             "test":  "D na fase final exige reinício sem concluir a campanha",
+                             "passed":  true
+                         },
+                         {
+                             "test":  "Reiniciar mantém a fase final e a infecção original",
+                             "passed":  true
+                         },
+                         {
+                             "test":  "A após repetir conclui a campanha pela vitória existente",
+                             "passed":  true
+                         }
+                     ]
+}

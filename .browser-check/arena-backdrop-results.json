@@ -1,0 +1,35 @@
+{
+    "suites":  {
+                   "arenaBackdrop":  {
+                                         "total":  62,
+                                         "failed":  [
+
+                                                    ]
+                                     },
+                   "education":  {
+                                     "total":  59,
+                                     "failed":  [
+
+                                                ]
+                                 },
+                   "networkCollapse":  {
+                                           "total":  32,
+                                           "failed":  [
+
+                                                      ]
+                                       },
+                   "mouseControls":  {
+                                         "total":  41,
+                                         "failed":  [
+
+                                                    ]
+                                     }
+               },
+    "performance":  {
+                        "withoutBackdropMs":  5415.39999999851,
+                        "withBackdropMs":  1836.7000000011176,
+                        "resolution":  "954x541",
+                        "frames":  5,
+                        "renderer":  "SwiftShader/headless; not a hardware FPS guarantee"
+                    }
+}

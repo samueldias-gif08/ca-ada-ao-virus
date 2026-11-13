@@ -1,0 +1,34 @@
+<!doctype html><html><meta charset="utf-8"><title>Diagnóstico de abertura</title><pre id="result">Aguardando abertura</pre><iframe src="../../index.html"></iframe><script>
+const frame=document.querySelector('iframe');frame.onload=async()=>{
+ const w=frame.contentWindow,B=w.Boitata;
+ const info={url:w.location.href,ready:w.document.readyState,modules:B?Object.keys(B):[],phase:B?.S?.phase,menu:!!B?.TempleMenu?.root,webgl:!!B?.Forest3D?.renderer,scripts:[...w.document.scripts].map(s=>s.src)};
+ const checks=[];const check=(test,passed)=>{checks.push({test,passed:!!passed});document.body.dataset.tests=JSON.stringify({total:checks.length,failed:checks.filter(q=>!q.passed)});document.getElementById('result').textContent=JSON.stringify(checks,null,2);};
+ try{
+  B.Store.write=()=>true;B.S.save=B.Store.defaults();w.requestAnimationFrame=()=>0;
+  check('Menu principal abre',!!B.TempleMenu.root&&B.S.phase==='menu');
+  B.TempleMenu.root.querySelector('.temple-play').click();
+  await new Promise(resolve=>setTimeout(resolve,850));
+  check('Jogar abre seleção',B.S.phase==='characters');
+  const cards=[...w.document.querySelectorAll('.guardian-card')];
+  check('Cartões apontam para as ilustrações',cards.length===2&&cards.every(c=>c.querySelector('img').src.endsWith(c.dataset.character+'-portrait.png')));
+  cards[0].querySelector('button').click();await new Promise(resolve=>setTimeout(resolve,400));
+  check('Escolher guardião inicia fase',['lesson','ready'].includes(B.S.phase)&&B.S.level?.id===1);
+  // Follow the actual lesson/ready buttons, without skipping the UI transition.
+  for(let i=0;i<3&&B.S.phase!=='playing';i++){
+   const button=w.document.querySelector('#overlay .primary')||w.document.querySelector('#overlay .actions button');
+   if(!button)break;button.click();
+  }
+  check('Botão da fase inicia partida',B.S.phase==='playing');
+  B.Renderer.draw(1000);check('Personagem novo aparece',B.OrganicCharacters.surfaces.get('b-body')?.mesh.visible);
+  B.S.save.character='iara';B.Game.start(1);B.Game.play();B.Renderer.draw(1100);
+  const visuals=B.OrganicCharacters.surfaces,crown=visuals.get('i-crowncap'),lock=visuals.get('i-lock0');
+  check('Iara tem cabelo preto rente à cabeça',crown?.mesh.visible&&crown.mesh.material.color.getHexString()==='080808'&&Math.max(...crown.curve.points.map(p=>p.y))<1.69);
+  check('Mechas lisas ficam alinhadas nas costas',lock?.mesh.visible&&Math.abs(lock.curve.points[1].x-lock.curve.points[2].x)<.001&&Math.abs(lock.curve.points[1].z-lock.curve.points[2].z)<.001&&lock.mesh.material.color.getHexString()==='080808');
+  check('Franja e preenchimento das costas aparecem',visuals.get('i-fringe4')?.mesh.visible&&visuals.get('i-hairback')?.mesh.visible);
+  B.S.save.unlocked=10;B.Game.start(9);B.CucaArena.warning=true;B.CucaArena.hud();
+  check('Aviso da Cuca removido da arena',!w.document.getElementById('cuca-hud'));
+  B.Game.start(1);check('Ampliação não muda limites dos outros setores',!B.Maps.inside(-2,9)&&!B.Maps.inside(25,9));
+  B.UI.menu();check('Retorno ao menu funciona',B.S.phase==='menu');
+ }catch(error){check(error.stack,false);}
+ info.checks=checks;document.body.dataset.startup=JSON.stringify(info);document.body.dataset.tests=JSON.stringify({total:checks.length,failed:checks.filter(q=>!q.passed)});document.getElementById('result').textContent=JSON.stringify(info,null,2);
+};</script></html>

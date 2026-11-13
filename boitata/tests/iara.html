@@ -1,0 +1,40 @@
+<!doctype html><html lang="pt-BR"><meta charset="utf-8"><title>Iara — inspeção visual</title>
+<style>body{background:#14242b;color:#e8f1ed;font:16px system-ui;margin:20px}main{display:flex;flex-wrap:wrap}figure{margin:8px}img{width:400px}iframe{position:absolute;left:-3000px;width:960px;height:640px}pre{white-space:pre-wrap;max-height:200px;overflow:auto}</style>
+<h1>Iara — modelo e expressões 3D</h1><a href="../index.html" style="color:turquoise">Abrir jogo</a><pre id="results">Carregando…</pre><main></main><iframe src="../index.html"></iframe>
+<script>
+const errors=[];window.addEventListener('error',e=>errors.push(e.message));
+document.querySelector('iframe').onload=async({target})=>{
+ const w=target.contentWindow,B=w.Boitata,F=B.Forest3D,V=B.OrganicCharacters,T=w.THREE,results=[];
+ const check=(test,passed)=>results.push({test,passed:!!passed});
+ w.addEventListener('error',e=>errors.push(e.message));w.requestAnimationFrame=()=>0;B.S.phase='paused';
+ try{
+  const script=w.document.createElement('script');script.src='js/storyActors.js';await new Promise((ok,no)=>{script.onload=ok;script.onerror=no;w.document.body.append(script)});
+  const path=Array.from({length:12},(_,i)=>({x:Math.sin(i*.4)*.3,y:-i*.3,z:.45})),before=JSON.stringify(path);
+  F.begin();V.player('iara',path,0,{x:0,y:1});
+  const torso=V.surfaces.get('i-torso').mesh.geometry.attributes.position;
+  let width=0;for(let i=0;i<torso.count;i++)width=Math.max(width,Math.abs(torso.getX(i)));
+  check('Tronco mais estreito que o original (.23)',width<.19);
+  check('Mãos com quatro dedos e polegar',[-1,1].every(s=>V.surfaces.has('i-finger'+s+'thumb')));
+  let lock=V.surfaces.get('i-lock0').mesh;const shortCount=lock.geometry.drawRange.count;
+  const long=Array.from({length:80},(_,i)=>({x:Math.sin(i*.2),y:-i*.3,z:.45}));V.player('iara',long,16,{x:0,y:1});
+  lock=V.surfaces.get('i-lock0').mesh;check('Cabelo cresce com a trilha',lock.geometry.drawRange.count>shortCount);
+  const geo=lock.geometry;V.player('iara',long,32,{x:0,y:1});check('Buffers reutilizados',lock.geometry===geo);
+  check('Desenho preserva coordenadas da trilha',JSON.stringify(path)===before);
+  const scene=new T.Scene();scene.background=new T.Color('#14242b');scene.add(new T.HemisphereLight('#e3f8ff','#54604f',2));
+  const light=new T.DirectionalLight('#ffe0bd',2.5);light.position.set(-3,5,4);scene.add(light);
+  const rim=new T.DirectionalLight('#78caca',1.5);rim.position.set(3,3,-4);scene.add(rim);
+  const actor=B.StoryActors.build('iara');actor.root.visible=true;scene.add(actor.root);
+  const camera=new T.PerspectiveCamera(32,1,.01,100);camera.position.set(.75,1.5,3.5);camera.lookAt(0,.95,0);F.renderer.setSize(600,600,false);
+  for(const [emotion,mode]of [['calm','idle'],['fear','gasp'],['determined','swim'],['surprise','start'],['neutral','comb']]){
+   B.StoryActors.iara(actor,1.2,{emotion,mode});F.renderer.render(scene,camera);
+   const fig=document.createElement('figure'),img=document.createElement('img'),caption=document.createElement('figcaption');img.src=F.canvas.toDataURL();caption.textContent=emotion+' / '+mode;fig.append(img,caption);document.querySelector('main').append(fig);
+  }
+  check('Rig e expressões sem vértices inválidos',[...actor.surfaces.values()].every(q=>q.mesh.geometry.attributes.position.array.every(Number.isFinite)));
+  const count=F.renderer.info.memory.geometries;for(let i=0;i<60;i++){B.StoryActors.iara(actor,i/30,{mode:'swim',emotion:'determined'});F.renderer.render(scene,camera)}
+  check('Geometrias estáveis em animação',F.renderer.info.memory.geometries===count);
+  check('GPU sem erros',F.renderer.getContext().getError()===0);check('Sem erros JavaScript capturados',errors.length===0);
+  results.push({calls:F.renderer.info.render.calls,triangles:F.renderer.info.render.triangles});
+  B.StoryActors.dispose(actor);
+ }catch(e){check(e.stack||String(e),false)}
+ document.body.dataset.tests=JSON.stringify(results);document.getElementById('results').textContent=JSON.stringify(results,null,2);
+};</script></html>

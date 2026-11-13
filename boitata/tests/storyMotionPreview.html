@@ -1,0 +1,11 @@
+<!doctype html><html lang="pt-BR"><meta charset="utf-8"><title>Inspeção da história 2D</title><link rel="stylesheet" href="../css/temple.css"><style>body{margin:0;background:#07131b;color:#e5e7eb;font:14px system-ui}main{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:12px}figure{margin:0;position:relative}img{width:100%;display:block}figcaption{padding:8px}.hope{position:absolute;inset:0 0 30px;display:grid;place-items:center;text-align:center;background:#000;color:silver;font:24px "Cinzel Decorative",serif}iframe{position:fixed;left:-2000px;width:960px;height:540px;border:0}</style><main></main><iframe src="../../index.html"></iframe><script>
+document.querySelector('iframe').onload=async e=>{
+ const w=e.target.contentWindow,B=w.Boitata;w.requestAnimationFrame=()=>0;const H=B.Story;
+ if(!await H.start({manual:true})){document.body.dataset.error=H.error;return;}
+ const time=new URLSearchParams(location.search).get('time');if(time!==null){e.target.style.cssText='position:fixed;inset:0;left:0;width:100vw;height:100vh;border:0';H.resize();H.renderAt(Number(time));document.body.dataset.ready='true';return;}
+ H.renderer.domElement.width=480;H.renderer.domElement.height=270;
+ for(const [time,title]of [[11,'11 s'],[12,'12 s'],[13,'13 s'],[22,'22 s'],[23,'23 s'],[24,'24 s'],[36,'36 s'],[36.3,'36.3 s'],[36.6,'36.6 s'],[50.29,'50.29 s'],[50.45,'50.45 s'],[50.8,'50.8 s'],[70,'70 s'],[70.08,'70.08 s'],[70.17,'70.17 s'],[82.1,'82.1 s'],[87.1,'87.1 s'],[87.6,'87.6 s'],[100,'100 s'],[103,'103 s'],[107,'107 s'],[112.01,'112.01 s'],[112.75,'112.75 s'],[113.5,'113.5 s'],[130.5,'130.5 s'],[131,'131 s'],[132,'132 s'],[153,'153 s'],[157,'157 s'],[161,'161 s'],[164,'164 s'],[165,'165 s'],[166,'166 s']]){
+  H.renderAt(time);const f=document.createElement('figure'),img=document.createElement('img'),caption=document.createElement('figcaption');img.src=H.renderer.domElement.toDataURL();caption.textContent=title;f.append(img,caption);if(time===140){const span=document.createElement('span');span.className='hope';span.textContent='Que o sistema seja salvo';f.append(span);}document.querySelector('main').append(f);
+ }
+ H.stop();document.body.dataset.ready='true';
+};</script></html>

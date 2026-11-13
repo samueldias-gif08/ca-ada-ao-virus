@@ -1,0 +1,2 @@
+[9940:13276:1111/212129.353:ERROR:mojo\public\cpp\bindings\lib\interface_endpoint_client.cc:652] Message 6 rejected by interface blink.mojom.WidgetHost
+[9940:13276:1111/212129.355:ERROR:mojo\public\cpp\bindings\lib\interface_endpoint_client.cc:652] Message 7 rejected by interface blink.mojom.WidgetHost

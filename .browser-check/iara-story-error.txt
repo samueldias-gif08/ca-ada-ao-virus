@@ -1,0 +1,1 @@
+[8600:6328:1113/125527.658:ERROR:chrome\browser\web_applications\os_integration\os_integration_manager.cc:270] Can't perform OS integration while the browser is shutting down.

@@ -1,0 +1,18 @@
+<!doctype html><html lang="pt-BR"><meta charset="utf-8"><title>Ateliê de personagens</title><style>body{margin:0;background:#101b26;color:#eadcbb;font:18px system-ui}main{display:grid;grid-template-columns:1fr 1fr}figure{margin:8px;text-align:center}img{width:100%;height:420px;object-fit:contain}iframe{display:none}.play-link{display:block;padding:18px;text-align:center;color:#101b26;background:#eadcbb;font-weight:700;text-decoration:none}</style><a class="play-link" href="../index.html">▶ Abrir jogo completo — BOITATÁ</a><main></main><iframe src="../index.html"></iframe><script>
+coloque a frase ESCOLHA SEU GUARDIÃOdocument.querySelector('iframe').onload=e=>{
+ const w=e.target.contentWindow,B=w.Boitata,F=B.Forest3D,V=B.OrganicCharacters,T=w.THREE;
+ B.S.phase='paused';B.Store.write=()=>true;
+ const scene=F.scene,camera=F.camera;
+ for(const [id,label]of [['boitata','Boitatá'],['iara','Iara'],['cuca','Cuca'],['loira','Loira do Banheiro']]){
+  V.dispose();F.scene=new T.Scene();F.scene.background=new T.Color('#172532');
+  F.scene.add(new T.HemisphereLight('#d9edff','#42412f',2));const light=new T.DirectionalLight('#ffe7c4',3);light.position.set(-3,6,5);F.scene.add(light);
+  const rim=new T.DirectionalLight('#7eb9dd',2);rim.position.set(3,3,-4);F.scene.add(rim);
+  let center=new T.Vector3(0,1,0),span=2.4;
+  if(id==='boitata'||id==='iara'){V.player(id,[{x:0,y:0,z:.45},{x:-.8,y:-.2,z:.45},{x:-1.3,y:-.7,z:.45},{x:-1.8,y:-.4,z:.45},{x:-2.2,y:0,z:.45}],1000,{x:1,y:0});center.set(-.65,.8,-.15);span=2;}
+  if(id==='cuca'){B.CucaArena.warning=false;V.cuca(1000);center.set(17.5,2.8,9.5);span=3.3;}
+  if(id==='loira'){V.loira({x:-.5,y:-.5,angle:Math.PI/2,stride:0,appeared:0},1);center.set(0,1.2,0);span=1.6;}
+  const cam=new T.OrthographicCamera(-span,span,span, -span,.1,100);cam.position.copy(center).add(new T.Vector3(4,2.7,6));cam.lookAt(center);F.renderer.setSize(600,600,false);F.renderer.render(F.scene,cam);
+  const fig=document.createElement('figure'),img=document.createElement('img'),caption=document.createElement('figcaption');img.src=F.canvas.toDataURL();caption.textContent=label;fig.append(img,caption);document.querySelector('main').append(fig);
+ }
+ V.dispose();F.scene=scene;F.camera=camera;document.body.dataset.ready='true';
+};</script></html>

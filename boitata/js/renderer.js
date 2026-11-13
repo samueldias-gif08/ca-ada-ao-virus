@@ -1,18 +1,38 @@
-Boitata.Renderer={draw(t){
-const {level,phase,acc,oldCamera,camera,obstacles,items,enemies,snake,oldSnake,dir,invuln,particles}=Boitata.S;const {ctx}=Boitata.UI;const W=40,H=18,C=30;const l=level||BOITATA_LEVELS[0],alpha=phase==='playing'?Math.min(1,acc/l.stepMs):1,cam=oldCamera+(camera-oldCamera)*alpha;ctx.fillStyle=level?.id===30?'#09090e':'#08120f';ctx.fillRect(0,0,1200,540);ctx.lineWidth=1;
-for(let x=Math.floor(cam);x<cam+W+1;x++){const sx=(x-cam)*C;ctx.strokeStyle=l.color+'0e';ctx.beginPath();ctx.moveTo(sx,0);ctx.lineTo(sx,540);ctx.stroke();for(let y=1;y<H;y++){if(x===Math.floor(cam)){ctx.beginPath();ctx.moveTo(0,y*C);ctx.lineTo(1200,y*C);ctx.stroke();}if((x*7+y*13+l.id)%23===0){ctx.fillStyle=l.color+'28';ctx.fillRect(sx+12,y*C+12,3,3);}}}
-// Architectural decorations: chips, windows, nodes, ports, route arrows and distinct later variants.
-for(let x=Math.floor(cam/8)*8;x<cam+W+8;x+=8){let px=(x-cam)*C,seed=(x/8+l.id)%5;ctx.strokeStyle=l.color+'38';ctx.fillStyle=l.color+'0c';const y=(l.variant===1?H-2:1)*C;ctx.lineWidth=2;switch(l.pattern%5){case 0:ctx.fillRect(px,y,110,28);ctx.strokeRect(px,y,110,28);for(let k=0;k<7;k++)ctx.fillRect(px+k*16,y-4,4,4);break;case 1:ctx.strokeRect(px,y,130,28);ctx.fillRect(px,y,130,6);break;case 2:ctx.beginPath();ctx.arc(px+30,y+12,13,0,Math.PI*2);ctx.moveTo(px+43,y+12);ctx.lineTo(px+210,y+12);ctx.stroke();break;case 3:for(let k=0;k<6;k++)ctx.strokeRect(px+k*20,y,13,18);break;case 4:ctx.beginPath();ctx.moveTo(px,y);ctx.lineTo(px+30,y+15);ctx.lineTo(px,y+28);ctx.stroke();break;}ctx.fillStyle=l.color+'55';ctx.font='9px monospace';ctx.fillText((l.id>20?'CORE':l.id>10?'LINK':'BUS')+'-'+Math.abs(x+seed),px,y+45);}
-ctx.fillStyle=l.color+'24';ctx.fillRect(0,0,1200,3);ctx.fillRect(0,537,1200,3);
-for(const key of obstacles){const [x,y]=key.split(',').map(Number),px=(x-cam)*C;if(px< -C||px>1200)continue;ctx.fillStyle='#172a26';ctx.fillRect(px+2,y*C+2,26,26);ctx.strokeStyle=l.color+'80';ctx.strokeRect(px+4,y*C+4,22,22);ctx.fillStyle=l.color+'60';ctx.fillRect(px+8,y*C+9,4,4);ctx.fillRect(px+16,y*C+17,5,3);}
-for(const p of items){const x=(p.x-cam+.5)*C,y=(p.y+.5)*C;if(x< -30||x>1230)continue;const color={common:'#61daff',special:'#ffce69',health:'#ff91b7',score:'#d0c1ff'}[p.type];ctx.save();ctx.translate(x,y);ctx.shadowBlur=12;ctx.shadowColor=color;ctx.fillStyle=color;if(p.type==='health'){ctx.fillRect(-3,-9,6,18);ctx.fillRect(-9,-3,18,6);}else{ctx.rotate(Math.PI/4);ctx.fillRect(-7,-7,14,14);ctx.fillStyle='#0a2932';ctx.fillRect(-3,-3,6,6);}ctx.restore();}
-for(const e of enemies){const x=(e.x-cam+.5)*C,y=(e.y+.5)*C;const colors=['#ff6e85','#df7dff','#ffbc64','#fd4d55','#b5ee5a'];ctx.save();ctx.translate(x,y);ctx.fillStyle=colors[e.type];ctx.shadowColor=colors[e.type];ctx.shadowBlur=8;const pulse=Math.sin(t/120+e.x)>0?2:0;ctx.fillRect(-9,-8,18,16);ctx.fillRect(-13,-4,26,8);ctx.fillRect(-6,-12-pulse,4,5);ctx.fillRect(3,8,4,5+pulse);ctx.fillStyle='#220e24';ctx.fillRect(-6,-3,4,4);ctx.fillRect(3,-3,4,4);if(e.type===1){ctx.fillRect(-3,4,6,2);}if(e.type===3){ctx.strokeStyle=colors[e.type];ctx.strokeRect(-14,-14,28,28);}ctx.restore();}
-const display=snake.length?snake:Array.from({length:14},(_,i)=>({x:23-i,y:9+Math.floor(Math.sin(i*.4)*2)}));for(let i=display.length-1;i>=0;i--){const p=display[i],prev=oldSnake[i]||p,px=((prev.x+(p.x-prev.x)*alpha)-cam)*C,py=(prev.y+(p.y-prev.y)*alpha)*C;if(px< -30||px>1230)continue;ctx.save();ctx.globalAlpha=invuln>0&&Math.floor(t/80)%2?.35:1;ctx.shadowBlur=i===0?20:8;ctx.shadowColor='#b3ff63';ctx.fillStyle=i===0?'#c5ff85':i%2?'#87d94c':'#a6ed5b';ctx.fillRect(px+3,py+3,24,24);ctx.fillStyle='#406d26';ctx.fillRect(px+7,py+20,16,4);if(i===0){ctx.fillStyle='#0a2018';if(dir.y){ctx.fillRect(px+6,py+(dir.y<0?6:18),5,5);ctx.fillRect(px+19,py+(dir.y<0?6:18),5,5);}else{ctx.fillRect(px+18,py+6,6,5);ctx.fillRect(px+18,py+19,6,5);}ctx.fillStyle='#fff7ac';ctx.fillRect(px+20,py+7,2,2);}else{ctx.fillStyle='#d8ffad';ctx.fillRect(px+7,py+6,4,4);}ctx.restore();}
-for(const p of particles){ctx.globalAlpha=Math.max(0,p.life/.6);ctx.fillStyle=p.color;ctx.fillRect((p.x-cam)*C,p.y*C,3,3);}ctx.globalAlpha=1;
-Boitata.Renderer.extras(t,cam);
+Boitata.Renderer={
+ item(m,p,t){if(!m.visible(p))return;const x=p.x+.5,y=p.y+.5,z=.60+Math.sin(t*.003+p.x+p.y)*.065;
+  // Closed yellow envelope: gold thickness, raised paper, diagonal flap and seal.
+  m.box(x-.30,y-.20,z,.60,.40,.065,'#bb861e');
+  m.box(x-.29,y-.19,z+.065,.58,.38,.025,'#ffda49');
+  const a={x:x-.27,y:y-.17,z:z+.097},b={x,y:y+.05,z:z+.097},c={x:x+.27,y:y-.17,z:z+.097};
+  m.tube(a,b,.012,'#c39122');m.tube(b,c,.012,'#c39122');
+  m.tube({x:x-.27,y:y+.17,z:z+.097},b,.008,'#e5ae2b');m.tube(b,{x:x+.27,y:y+.17,z:z+.097},.008,'#e5ae2b');
+  const accent=p.type==='health'?'#ff91b7':p.type==='score'?'#d0c1ff':p.type==='special'?'#ffce69':'#ffe891';
+  m.box(x-.035,y+.015,z+.10,.07,.06,.016,accent);
+  m.box(x-.24+((Math.sin(t*.002+p.y)+1)/2)*.40,y-.14,z+.10,.035,.045,.008,'#fff3aa');
+ },
+ draw(t){
+ const B=Boitata,s=B.S,ctx=B.UI.ctx,l=s.level||BOITATA_LEVELS[0];
+ const alpha=s.phase==='playing'?Math.min(1,s.acc/l.stepMs):1,cam=0;
+ ctx.fillStyle='#06111c';ctx.fillRect(0,0,1200,540);
+ const m=new B.Mesh(ctx,{x:285,y:40,scale:22,camera:cam,arena:true});
+ B.ArenaBackdrop?.draw2D(ctx,m);
+ // Mesma projeção para o cenário e todas as entidades físicas.
+ const collapse=B.NetworkCollapse?.active()?B.NetworkCollapse:null;
+ if(collapse)collapse.draw(m);
+ if(B.GardenMaze?.active())B.GardenMaze.drawTraps(m);
+ ctx.lineWidth=1;ctx.strokeStyle=l.color+'28';
+ const line=(a,b)=>{ctx.beginPath();ctx.moveTo(...m.project(a));ctx.lineTo(...m.project(b));ctx.stroke();};
+ if(!collapse)for(let x=Math.floor(cam);x<=24;x++)line({x,y:0,z:0},{x,y:18,z:0});
+ if(!collapse)for(let y=0;y<=18;y++)line({x:cam,y,z:0},{x:24,y,z:0});
+ for(const key of s.obstacles){const [x,y]=key.split(',').map(Number);if(m.visible({x}))m.box(x+.08,y+.08,0,.84,.84,.65,'#285564');}
+ for(const h of s.hazards){if(!m.visible(h))continue;m.box(h.x+.1,h.y+.1,0,.8,.8,h.active?.7:.08,h.active?'#ff5966':'#e9bf52');}
+ for(const p of s.items)B.Renderer.item(m,p,t);
+ for(const e of s.enemies){m.ellipsoid(e.x+.5,e.y+.5,.45,.35,.35,.35,['#ff6e85','#df7dff','#ffbc64','#fd4d55','#b5ee5a'][e.type]);for(let k=0;k<4;k++){const a=k*Math.PI/2+t*.001;m.ellipsoid(e.x+.5+Math.cos(a)*.37,e.y+.5+Math.sin(a)*.37,.5,.09,.09,.13,'#ff9fba');}}
+ const character=B.Characters.get(),path=s.snake.length?B.Characters.points(s,alpha):Array.from({length:10},(_,i)=>({x:23-i,y:9,z:.45}));
+ if(l.id===5){if(B.PvP?.active())B.PvP.draw(m,t);}
+ else if(!(s.invuln>0&&Math.floor(t/80)%2))character.model(m,collapse?collapse.pose(path):B.GardenMaze?.active()?B.GardenMaze.pose(path):path,t,B.Movement.facing(s,alpha));
+ if(s.boss&&!s.boss.defeated&&s.level?.id===30){const x=20,y=9;m.ellipsoid(x,y,1.5,1.4,1.4,1.7,'#982653');m.ellipsoid(x,y,2,.65,.65,.65,'#ff526c');}
+ for(const p of s.particles)m.ellipsoid(p.x,p.y,.5,.045,.045,.09,p.color);
+ B.VirusVisuals.draw(m,t);m.flush();ctx.fillStyle='#E5E7EB';ctx.font='18px "Poiret One", Teko, sans-serif';ctx.fillText(l.motif||'REDE DIGITAL',22,25);ctx.fillText(character.name+' · '+character.growth+' · '+Math.max(0,path.length-5)+' segmentos',22,520);
+ if(s.boss&&s.level?.id===30){ctx.fillStyle='#ff718d';ctx.fillText('VÍRUS ZERO · ETAPA '+s.boss.stage+' · '+Math.ceil(s.boss.health)+' integridade',700,25);}
 }};
-Boitata.Renderer.extras=function(t,cam){const s=Boitata.S,l=s.level;if(!l)return;const ctx=Boitata.UI.ctx;ctx.save();ctx.strokeStyle=l.id===30?'#ff334466':l.color+'50';ctx.fillStyle=l.color+'90';ctx.font='10px monospace';
-for(let x=Math.floor(cam/13)*13;x<cam+40;x+=13){const px=(x-cam)*30,y=l.id%2?480:55;ctx.fillText(l.motif+' / '+(x+l.id),px,y);ctx.beginPath();const count=3+l.id%8;for(let n=0;n<count;n++){const dx=px+n*(8+l.id%5),dy=y+14+Math.sin(n*(.3+l.id*.11))*10;if(n===0)ctx.moveTo(dx,dy);else ctx.lineTo(dx,dy);ctx.fillRect(dx-1,dy-1,3,3);}ctx.stroke();}
-for(const h of s.hazards){const x=(h.x-cam)*30,y=h.y*30;ctx.strokeStyle=h.active?'#ff6c65':'#ffd96a';ctx.fillStyle=h.active?'#ff6c6570':'#ffd96a20';ctx.fillRect(x+3,y+3,24,24);ctx.strokeRect(x+2,y+2,26,26);ctx.fillStyle='#ffe3b3';ctx.fillText(h.active?'×':'!',x+11,y+19);}
-Boitata.Boss.draw(ctx,t,cam);ctx.restore();};
-

@@ -1,0 +1,4 @@
+[4840:11892:1112/193817.092:ERROR:services\device\usb\usb_descriptors.cc:145] Failed to read length for configuration 0.
+[4840:11892:1112/193817.093:ERROR:services\device\usb\usb_descriptors.cc:104] Failed to read all configuration descriptors. Expected 1, got 0.
+[4840:11892:1112/193817.094:ERROR:components\device_event_log\device_event_log_impl.cc:211] [19:38:17.095] USB: usb_device_win.cc:95 Failed to read descriptors from \\?\usb#vid_10c4&pid_8108#6&2953c98d&0&4#{a5dcbf10-6530-11d2-901f-00c04fb951ed}.
+8655449 bytes written to file C:/Users/Informática/Documents/Virus caçada/.browser-check/story-motion.png

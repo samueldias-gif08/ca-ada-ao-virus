@@ -1,0 +1,98 @@
+{
+    "suite":  {
+                  "total":  89,
+                  "failed":  [
+
+                             ]
+              },
+    "browserTests":  [
+                         {
+                             "test":  "Suite completa sem falhas",
+                             "passed":  true
+                         },
+                         {
+                             "test":  "Clique real na barra busca 50% da timeline",
+                             "passed":  true
+                         },
+                         {
+                             "test":  "Arrasto real com captura do ponteiro preserva pausa",
+                             "passed":  true
+                         },
+                         {
+                             "test":  "Controles cabem no celular sem esticar o quadro",
+                             "passed":  true
+                         },
+                         {
+                             "test":  "Arrasto por toque busca o ponto correto e preserva pausa",
+                             "passed":  true
+                         },
+                         {
+                             "test":  "Reprodução real em 1.4x mantém áudio sincronizado",
+                             "passed":  true
+                         },
+                         {
+                             "test":  "Mudança real para 2x aplica velocidade uma única vez",
+                             "passed":  true
+                         },
+                         {
+                             "test":  "Pausa real congela áudio e imagem",
+                             "passed":  true
+                         },
+                         {
+                             "test":  "Entrada nativa de tela cheia",
+                             "passed":  null,
+                             "status":  "manual",
+                             "reason":  "not granted"
+                         },
+                         {
+                             "test":  "Recusa de tela cheia não interrompe o player",
+                             "passed":  true
+                         },
+                         {
+                             "test":  "Saída nativa de tela cheia",
+                             "passed":  null,
+                             "status":  "manual",
+                             "reason":  "Entrada recusada pelo navegador headless"
+                         },
+                         {
+                             "test":  "Fim oferece repetição sem voltar automaticamente ao menu",
+                             "passed":  true
+                         },
+                         {
+                             "test":  "Botão real de repetição reinicia",
+                             "passed":  true
+                         },
+                         {
+                             "test":  "Nenhum erro JavaScript durante interações reais",
+                             "passed":  true
+                         },
+                         {
+                             "test":  "Voltar ao menu encerra a sessão",
+                             "passed":  true
+                         }
+                     ],
+    "audio1_4x":  {
+                      "delta":  1.7351111111111095,
+                      "elapsed":  1.2388999999994412,
+                      "drift":  0.01625396825396308,
+                      "rate":  1.399999976158142,
+                      "running":  "running"
+                  },
+    "audio2x":  {
+                    "delta":  1.3990022675736924,
+                    "elapsed":  0.7065,
+                    "drift":  0,
+                    "rate":  2
+                },
+    "fullscreen":  {
+                       "active":  false,
+                       "error":  "not granted",
+                       "status":  "Tela cheia indisponível neste navegador.",
+                       "enabled":  true,
+                       "focus":  true
+                   },
+    "fullscreenDiagnostic":  {
+                                 "active":  false,
+                                 "error":  "not granted"
+                             }
+}

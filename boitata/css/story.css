@@ -1,0 +1,61 @@
+body.story-active{overflow:hidden;background:#000}body.story-active>header,body.story-active>main,body.story-active>.page-footer{display:none}
+.story-screen{position:fixed;inset:0;z-index:100;isolation:isolate;background:#000;color:#e5e7eb;overflow:hidden}
+.story-screen .story-canvas{position:absolute;inset:0;display:block;width:100%;height:100%;image-rendering:auto}
+.story-letterbox{position:absolute;left:0;right:0;height:6.5%;background:#000;z-index:2;pointer-events:none}.story-letterbox-top{top:0}.story-letterbox-bottom{bottom:0}
+.story-curtain{position:absolute;inset:0;background:#000;pointer-events:none;z-index:4}
+.story-hope{position:absolute;inset:0;z-index:5;display:grid;place-items:center;pointer-events:none;opacity:0;padding:30px;text-align:center}
+.story-hope span{font:400 clamp(26px,4.4vw,66px)/1.5 "Cinzel Decorative",serif;letter-spacing:.09em;color:#e5e7eb;background:linear-gradient(110deg,#b5bbc4 0%,#fff 45%,#b5bbc4 55%,#e5e7eb 100%);background-size:240% 100%;background-position:var(--story-sheen,0%) 0;background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 16px #00a87865);max-width:1000px}
+.story-dust{position:absolute;inset:20%;opacity:.7;background-image:radial-gradient(circle,#4bcc9433 1px,transparent 2px),radial-gradient(circle,#b0f2d877 1px,transparent 2px);background-size:67px 89px,117px 79px;animation:story-dust 9s linear infinite paused}
+.story-glitch{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:0;background:repeating-linear-gradient(0deg,transparent 0 12px,#3fc7bd30 12px 13px,transparent 13px 31px);mix-blend-mode:screen}
+.story-speed{position:absolute;inset:7%;z-index:2;pointer-events:none;opacity:0;background:repeating-conic-gradient(from 90deg at 50% 50%,transparent 0deg 13deg,#c8fff020 13deg 13.3deg,transparent 13.3deg 25deg);mask-image:radial-gradient(ellipse,transparent 25%,#000 100%)}
+.story-divider{position:absolute;top:6.5%;bottom:6.5%;left:50%;width:2px;background:#050a11;z-index:3;opacity:0;pointer-events:none}
+.story-paused .story-dust{animation-play-state:paused}
+.story-loading{position:absolute;inset:0;z-index:6;display:grid;place-items:center;padding:40px 12%;text-align:center;background:#030d10;color:#e5e7eb;font:400 clamp(16px,2vw,24px)/1.6 Marcellus,serif;letter-spacing:.04em}.story-load-error{color:#ead4c4}
+@keyframes story-dust{to{background-position:15px -89px,-10px -79px}}
+@media(max-width:600px){.story-letterbox{height:8%}.story-hope span{font-size:clamp(22px,6vw,36px)}}
+
+/* Timeline player. All character artwork remains in the existing canvas. */
+.story-screen [hidden]{display:none!important}
+.story-controls{position:absolute;inset:auto 0 0;z-index:10;padding:38px 28px max(14px,env(safe-area-inset-bottom));color:#c0c0c0;background:linear-gradient(transparent,#000b 35%,#061410f2);font:400 14px/1.4 Outfit,sans-serif;transition:opacity .24s,transform .24s}
+.story-controls-hidden .story-controls{opacity:0;transform:translateY(8px);pointer-events:none}
+.story-controls-hidden{cursor:none}
+.story-control-row{display:flex;align-items:center;gap:10px;min-height:44px}
+.story-control-spacer{flex:1}
+.story-controls button,.story-ended button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border:1px solid transparent;border-radius:5px;padding:8px 12px;background:transparent;color:#c0c0c0;font:500 13px/1.2 Outfit,sans-serif;cursor:pointer;transition:color .16s,background .16s,border-color .16s}
+.story-controls button:hover,.story-ended button:hover{color:#00d59a;background:#00a87812;border-color:#00a87855}
+.story-controls button:disabled{opacity:.4;cursor:wait}
+.story-controls :focus-visible,.story-ended button:focus-visible{outline:2px solid #00a878;outline-offset:3px}
+.story-controls .story-icon-button{width:44px;padding:9px;flex-shrink:0}
+.story-controls svg,.story-ended svg{display:block;fill:currentColor;width:24px;height:24px;flex-shrink:0}
+.story-controls .story-text-button{font-size:11px;letter-spacing:.08em;white-space:nowrap}
+.story-time{font-variant-numeric:tabular-nums;white-space:nowrap;font-size:13px;color:#e1e6e3}
+.story-progress{position:relative;height:32px;display:flex;align-items:center}
+.story-seek{--story-progress:0%;appearance:none;-webkit-appearance:none;display:block;width:100%;height:32px;margin:0;padding:0;background:transparent;cursor:pointer;touch-action:none;border:0;border-radius:4px}
+.story-seek::-webkit-slider-runnable-track{height:3px;border-radius:3px;background:linear-gradient(to right,#00a878 0 var(--story-progress),#c0c0c047 var(--story-progress) 100%);transition:height .16s,box-shadow .16s}
+.story-seek::-moz-range-track{height:3px;border-radius:3px;background:linear-gradient(to right,#00a878 0 var(--story-progress),#c0c0c047 var(--story-progress) 100%);transition:height .16s,box-shadow .16s}
+.story-seek::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:10px;height:10px;margin-top:-3.5px;border:0;border-radius:50%;background:#00c78e;box-shadow:0 0 8px #00a87866;transition:transform .16s}
+.story-seek::-moz-range-thumb{width:10px;height:10px;border:0;border-radius:50%;background:#00c78e;box-shadow:0 0 8px #00a87866;transition:transform .16s}
+.story-seek:hover::-webkit-slider-runnable-track,.story-seek:focus-visible::-webkit-slider-runnable-track{height:5px;box-shadow:0 0 12px #00a87855}
+.story-seek:hover::-webkit-slider-thumb,.story-seek:focus-visible::-webkit-slider-thumb{transform:scale(1.3);margin-top:-2.5px}
+.story-seek:hover::-moz-range-track,.story-seek:focus-visible::-moz-range-track{height:5px;box-shadow:0 0 12px #00a87855}
+.story-seek:hover::-moz-range-thumb,.story-seek:focus-visible::-moz-range-thumb{transform:scale(1.3)}
+.story-time-preview{position:absolute;bottom:calc(100% + 2px);transform:translateX(-50%);padding:5px 9px;border:1px solid #c0c0c036;border-radius:4px;background:#061410f5;color:#e1e6e3;font-size:12px;font-variant-numeric:tabular-nums;pointer-events:none;box-shadow:0 3px 18px #0008}
+.story-speed-control{position:relative}
+.story-speed-control>button{min-width:62px;font-variant-numeric:tabular-nums}
+.story-speed-control>button span{font-size:12px;color:#00a878}
+.story-speed-menu{position:absolute;bottom:calc(100% + 14px);right:0;width:200px;padding:8px;background:#061410f5;border:1px solid #c0c0c036;border-radius:8px;box-shadow:0 8px 32px #0009}
+.story-speed-heading{display:block;padding:9px 10px;color:#8ba399;font-size:10px;letter-spacing:.13em}
+.story-speed-menu button{display:flex;width:100%;justify-content:flex-start;text-align:left;padding:12px 10px}
+.story-speed-menu button span{width:30px;font-variant-numeric:tabular-nums}
+.story-speed-menu [aria-checked=true]{color:#00d59a;background:#00a8781c}
+.story-speed-menu [aria-checked=true]::after{content:'✓';margin-left:auto}
+.story-ended{position:absolute;inset:0;z-index:8;display:grid;place-items:center;background:transparent;pointer-events:none}
+.story-ended button{pointer-events:auto;padding:15px 22px;border:1px solid #00a87888;background:#061410df;box-shadow:0 0 30px #00a87822;font-size:13px;letter-spacing:.07em}
+.story-player-status{position:absolute;bottom:100%;right:28px;font-size:12px}
+.story-screen:focus{outline:0}
+@media(max-width:700px){.story-controls{padding:30px 14px max(10px,env(safe-area-inset-bottom))}.story-control-row{gap:4px}.story-controls .story-text-button{font-size:10px;padding:8px}.story-time{font-size:12px}}
+@media(max-width:480px){.story-controls{padding-right:12px;padding-left:12px}.story-control-row{display:grid;grid-template-columns:36px minmax(0,1fr) 54px 36px;gap:4px}.story-control-spacer{display:none}.story-controls .story-icon-button{width:36px;min-height:40px;padding:6px}.story-time{grid-column:2;grid-row:1}.story-speed-control{grid-column:3;grid-row:1}.story-speed-control>button{min-width:54px;padding:6px}.story-controls [data-story=fullscreen]{grid-column:4;grid-row:1}.story-controls [data-story=skip]{grid-column:3;grid-row:2;font-size:9px}.story-controls [data-story=menu]{grid-column:1 / span 2;grid-row:2;justify-self:start;font-size:9px}.story-speed-menu{right:-40px;width:190px}.story-ended button{font-size:11px;padding:14px}.story-player-status{right:12px}}
+@media(prefers-reduced-motion:reduce){.story-controls,.story-controls button,.story-seek::-webkit-slider-thumb{transition:none}}
+@media(max-width:480px){.story-speed-control>button{min-width:0;width:54px;padding:6px 3px;gap:4px;font-size:12px;white-space:nowrap}}
+@media(max-width:480px){.story-controls [data-story=skip],.story-controls [data-story=menu]{font-size:11px}}
+

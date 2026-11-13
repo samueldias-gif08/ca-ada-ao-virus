@@ -1,1 +1,97 @@
-.toolbar .tools{flex-wrap:wrap;justify-content:flex-end}.overlay{z-index:3}.panel{max-height:100%;overflow:auto}.hud b{overflow-wrap:anywhere}.arena-label{color:#b7dfc9}.touch{touch-action:none}@media(max-width:700px){.tools button{font-size:9px}.toolbar small{max-width:140px}.toolbar .tools{max-width:180px}.hud b{font-size:12px}}
+.toolbar .tools{flex-wrap:wrap;justify-content:flex-end}.overlay{z-index:3}.panel{max-height:100%;overflow:auto}.hud b{overflow-wrap:anywhere}.arena-label{color:#E5E7EB}.touch{touch-action:none}@media(max-width:700px){.tools button{font-size:9px}.toolbar small{max-width:140px}.toolbar .tools{max-width:180px}.hud b{font-size:12px}}
+/* During a mission the complete game fits the usable browser height. */
+body.arena-active{height:100dvh;overflow:hidden}
+body.arena-active>header,body.arena-active>.page-footer,body.arena-active main>.heading,body.arena-active main>.eyebrow,body.arena-active main>.below{display:none}
+body.arena-active main{height:100%;width:100%;max-width:none;margin:0;padding:8px;display:flex;flex-direction:column}
+body.arena-active .console{flex:1;min-height:0;display:flex;flex-direction:column}
+body.arena-active .console .viewport{flex:1;min-height:0;aspect-ratio:auto;overflow:hidden}
+body.arena-active .console #game{position:absolute;inset:0;object-fit:contain}
+body.arena-active .toolbar{padding:8px 16px}
+body.arena-active .hud{padding:8px 16px}
+body.arena-active .chase-hud{padding:8px 16px}
+body.arena-active .console-footer{padding:8px 16px}
+.graphics-toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 20px;background:#252830;font:10px var(--font-ui);color:#E5E7EB}.graphics-toolbar button{font-size:11px;padding:5px 10px}.graphics-toolbar span:first-child{margin-right:auto;color:#C0C0C0}.console .viewport{aspect-ratio:16/9}.console #game{image-rendering:auto;object-fit:contain}.console .arena-label{color:#E5E7EB;text-shadow:0 1px 4px #17191e;background:#30343b88;top:10px;padding:7px 10px;border-radius:4px}.console:fullscreen{width:100%;height:100%;display:flex;flex-direction:column;background:#191b20;border:0;border-radius:0}.console:fullscreen .viewport{flex:1;min-height:0;aspect-ratio:auto}.console:fullscreen #game{position:absolute;inset:0}.console:fullscreen .console-footer{padding:8px 20px}@media(min-width:1800px){main{max-width:1800px}}@media(max-width:700px){.console .viewport{aspect-ratio:1.15}.graphics-toolbar{gap:8px;padding:8px;font-size:9px}.graphics-toolbar span:first-child{display:none}}
+.chase-hud{display:flex;flex-wrap:wrap;gap:8px 18px;padding:12px 20px;background:#252830;color:#E5E7EB;font:11px var(--font-ui)}.chase-hud b{color:#E5E7EB}.chase-notice{position:absolute;z-index:2;left:12%;right:12%;top:48px;text-align:center;color:#fff2ba;text-shadow:0 2px 5px #000;font:700 15px var(--font-ui);pointer-events:none;background:#391c34cc;border-radius:5px}.chase-notice:empty{display:none}.predator-alert{box-shadow:inset 0 0 60px #ff204b99}.predator-alert::after{content:'';position:absolute;inset:0;border:4px solid #e9446d;pointer-events:none;z-index:1}@media(max-width:700px){.chase-hud{font-size:9px;padding:8px;gap:6px 10px}.chase-notice{font-size:10px;left:5%;right:5%;top:40px}}
+/* Give the arena more height while keeping mission controls visible. */
+body.arena-active main{padding:2px}
+body.arena-active .toolbar{padding:4px 12px}
+body.arena-active .toolbar small{margin-top:2px}
+body.arena-active .hud{padding:4px 12px}
+body.arena-active .hud b{margin-top:2px}
+body.arena-active .chase-hud{padding:4px 12px;gap:4px 14px}
+body.arena-active .graphics-toolbar{padding:4px 12px;gap:8px}
+body.arena-active .console-footer{padding:4px 12px}
+.console{position:relative}
+.fullscreen-control{position:absolute;right:10px;bottom:10px;z-index:2;width:auto}
+.fullscreen-control button{display:block;padding:7px 10px;font-size:11px;line-height:1.2;background:#252830e6}
+.console .chase-hud{background:#252830e6}
+.console .arena-label{background:#252830e6}
+
+.collapse-timer { color: #8eeaff; font-variant-numeric: tabular-nums; }
+.collapse-timer.collapse-critical { color: #ff758e; }
+
+.touch[hidden] { display: none; }
+.control-hint { color: #E5E7EB; font: 11px var(--font-ui); text-align: center; }
+#control-mode { color: inherit; background: #30343b; border: 1px solid #7D8590; border-radius: 4px; padding: 5px; }
+
+.duel-hud { position: absolute; z-index: 2; inset: 0; pointer-events: none; }
+.duel-health { position: absolute; bottom: 12px; left: 12px; display: grid; gap: 3px; padding: 6px 10px; border-radius: 5px; background: #171331e8; color: #fff; font: bold clamp(8px, 1.3vw, 12px) var(--font-ui); }
+.duel-health b { color: #83e4ff; font-size: 18px; letter-spacing: 3px; }
+.duel-health:last-child { top: 12px; right: 12px; bottom: auto; left: auto; text-align: right; }
+.duel-health:last-child b { color: #ff86aa; }
+
+#cuca-hud, #maze-hud, #hide-seek-hud, #map-preview-controls {
+  position: absolute;
+  z-index: 4;
+  padding: 8px;
+  border: 1px solid var(--silver-dark);
+  border-radius: 5px;
+  background: #30343bed;
+  color: var(--silver-light);
+  text-align: center;
+  font: 600 clamp(15px, 1.3vw, 20px)/1.15 var(--font-ui);
+}
+
+#cuca-hud, #maze-hud, #hide-seek-hud {
+  inset: 12px 20% auto;
+}
+#cuca-hud.danger { color: #ff91a6; border-color: currentColor; }
+#map-preview-controls {
+  inset: auto 12px 14px;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 700px) {
+  #cuca-hud, #maze-hud, #hide-seek-hud { inset-inline: 8%; }
+}
+
+/* Multiple-choice panel: scoped to the existing educational question flow. */
+.overlay:has(> .quiz-panel){background:#03130fe8}
+.overlay .quiz-panel{width:min(820px,100%);max-height:100%;padding:clamp(16px,2.4vw,28px);border:1px solid #c0c0c07a;border-radius:12px;background:linear-gradient(145deg,#0b3026,#061410 75%);box-shadow:0 18px 60px #0008,inset 0 1px #c0c0c018;color:#edf4f0;scrollbar-color:#00a878 #061410}
+.overlay .quiz-panel .tag{color:#83d9bd;font-size:11px;letter-spacing:.09em;line-height:1.5}
+.overlay .panel.quiz-panel h2{font:400 clamp(21px,2.6vw,32px)/1.25 Marcellus,serif;letter-spacing:0;margin:10px 0 16px;padding:0;color:#e1e9e4;background:none;-webkit-text-stroke:0;filter:none}
+.overlay .quiz-panel .quiz-question{margin:0;text-align:left;max-width:none;font:400 clamp(16px,1.5vw,20px)/1.5 Marcellus,serif;color:#edf4f0}
+.quiz-panel .quiz-options{display:grid;grid-template-columns:1fr;gap:10px;margin-top:22px}
+.overlay .quiz-panel .quiz-options button{display:flex;align-items:center;gap:14px;width:100%;min-height:54px;padding:12px 16px;border:1px solid #c0c0c04d;border-radius:7px;background:#061c15;color:#e1e9e4;box-shadow:none;text-align:left;font:400 clamp(15px,1.3vw,18px)/1.4 Marcellus,serif;transition:background .16s,border-color .16s,box-shadow .16s}
+.quiz-letter{display:grid;place-items:center;flex:0 0 30px;width:30px;height:30px;border:1px solid #c0c0c080;border-radius:5px;color:#c0c0c0;font:400 16px/1 Marcellus,serif}
+.quiz-option-text{min-width:0;overflow-wrap:anywhere}
+.overlay .quiz-panel .quiz-options button:hover:not(:disabled){background:#0b392b;border-color:#00a878;box-shadow:0 0 16px #00a87820}
+.quiz-panel .quiz-options button:focus-visible{outline:2px solid #00c38c;outline-offset:3px}
+.quiz-panel .quiz-options .quiz-correct{border-color:#00a878}
+.quiz-panel .quiz-options .quiz-incorrect{border-color:#e77e91}
+@media(max-width:600px){.overlay:has(> .quiz-panel){padding:10px}.overlay .quiz-panel{padding:16px}.quiz-panel .quiz-options{gap:8px;margin-top:16px}.overlay .quiz-panel .quiz-options button{padding:10px 12px;gap:10px;min-height:52px}.overlay .quiz-panel .tag{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.quiz-panel .quiz-options button{transition:none}}
+
+/* Behind the canvas only; the WebGL exterior pass preserves each map's interior. */
+body.arena-active{background:#061410 url('../assets/backgrounds/circuit-board.png') center/cover no-repeat}
+body.arena-active .console .viewport{background:#061410 url('../assets/backgrounds/circuit-board.png') center/cover no-repeat}
+
+body.arena-active{background-color:transparent}\nbody.arena-active .console .viewport{background-color:transparent}
+
+
+.console .chase-hud{background:rgba(37,40,48,.17)!important;backdrop-filter:blur(4px)}.console .arena-label{background:rgba(37,40,48,.17)!important;backdrop-filter:blur(4px)}

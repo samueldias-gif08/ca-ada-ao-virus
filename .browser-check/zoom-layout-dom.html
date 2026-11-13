@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>BOITATÁ — resoluções e layout</title>
+</head><body data-tests="{&quot;passed&quot;:28,&quot;total&quot;:28,&quot;failed&quot;:[]}"><pre id="results">{
+  "passed": 28,
+  "total": 28,
+  "failed": []
+}</pre><iframe title="Arena de teste" src="../index.html" style="border: 0px; width: 2400px; height: 900px;"></iframe>
+<script>
+const frame=document.querySelector('iframe'),results=[];
+const check=(test,passed)=>results.push({test,passed:!!passed});
+frame.onload=async()=>{
+ try{
+  const win=frame.contentWindow,B=win.Boitata,F=B.Forest3D;
+  B.Store.key='boitata-viewport-test';B.S.save=B.Store.defaults();B.S.save.unlocked=30;B.Game.start(1);B.Game.play();B.S.phase='paused';
+  const wait=()=>new Promise(resolve=>setTimeout(resolve,150));
+  F.draw(1);const projection=F.camera.projectionMatrix.clone(),position=F.camera.position.clone();
+  for(const [w,h]of [[1366,768],[1280,720],[1920,1080],[2560,1440],[3840,2160],[900,1200],[2400,900]]){
+   frame.style.width=w+'px';frame.style.height=h+'px';await wait();F.resize();F.draw(w);
+   const doc=win.document,root=doc.documentElement,view=doc.querySelector('.viewport').getBoundingClientRect();
+   check(w+' × '+h+': nenhuma rolagem',root.scrollWidth===win.innerWidth&&root.scrollHeight===win.innerHeight);
+   check(w+' × '+h+': arena cabe na tela',view.top>=0&&view.bottom<=win.innerHeight&&view.left>=0&&view.right<=win.innerWidth&&view.height>0);
+   check(w+' × '+h+': posição da câmera e mundo invariáveis',F.camera.position.equals(position)&&B.S.generated===24);
+   check(w+' × '+h+': buffer preserva proporção',Math.abs(F.width/F.height-view.width/view.height)<.01&&Math.abs((F.camera.right-F.camera.left)/(F.camera.top-F.camera.bottom)-view.width/view.height)<.01);
+  }
+  win.localStorage.removeItem(B.Store.key);
+ }catch(e){check('Erro: '+e.stack,false);}
+ const summary={passed:results.filter(r=>r.passed).length,total:results.length,failed:results.filter(r=>!r.passed)};
+ document.body.dataset.tests=JSON.stringify(summary);document.getElementById('results').textContent=JSON.stringify(summary,null,2);
+};
+</script>
+</body></html>

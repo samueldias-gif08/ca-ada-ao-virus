@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><base href="../boitata/tests/"><meta charset="utf-8"><title>Testes — Boitatá</title></head><body style="background:#08120f;color:#caff94;font:14px monospace"><h1>Verificação funcional — Boitatá</h1><p>Testes isolados do progresso real. Percursos usam encontros aleatórios desativados; colisões, ondas e chefe são verificados separadamente.</p><pre id="results">✓ Exatamente 30 fases e 30 cores
+✓ Banco com pelo menos 50 perguntas e IDs únicos
+✓ Cada tema avaliado tem pelo menos duas perguntas
+✓ Cinco resumos com 100–150 palavras
+✓ Fase bloqueada recusada pela lógica
+✓ Avanço automático e reversão para o corpo bloqueada
+✓ Inversão vertical imediata bloqueada
+✓ Corpo acompanha o caminho
+✓ Coleta aumenta corpo, objetivo e pontos
+✓ Colisão com vírus reduz vida e protege temporariamente
+✓ Derrota não duplica vírus
+✓ Repetir após derrota mantém total
+✓ Duplicação acumulada 1
+✓ Duplicação acumulada 2
+✓ Duplicação acumulada 3
+✓ Duplicação acumulada 4
+✓ Perguntas não se repetem imediatamente
+✓ Erros e áudio persistem
+✓ Acerto desbloqueia próxima, salva conclusão e zera erros
+✓ Ondas respeitam limite sem truncar total
+✓ Spawn não ocorre sobre corpo, item ou obstáculo
+✓ 30 layouts com geometria distinta
+✓ Rota alcançável e coleta concluída no setor 1
+✓ Janela de câmera preserva obstáculos à frente 1
+✓ Sem pergunta obrigatória 1
+✓ Rota alcançável e coleta concluída no setor 2
+✓ Janela de câmera preserva obstáculos à frente 2
+✓ Sem pergunta obrigatória 2
+✓ Rota alcançável e coleta concluída no setor 3
+✓ Janela de câmera preserva obstáculos à frente 3
+✓ Sem pergunta obrigatória 3
+✓ Rota alcançável e coleta concluída no setor 4
+✓ Janela de câmera preserva obstáculos à frente 4
+✓ Sem pergunta obrigatória 4
+✓ Rota alcançável e coleta concluída no setor 5
+✓ Janela de câmera preserva obstáculos à frente 5
+✓ Sem pergunta obrigatória 5
+✓ Rota alcançável e coleta concluída no setor 6
+✓ Janela de câmera preserva obstáculos à frente 6
+✓ Pergunta só após objetivo 6
+✓ Conclusão por resposta correta 6
+✓ Rota alcançável e coleta concluída no setor 7
+✓ Janela de câmera preserva obstáculos à frente 7
+✓ Pergunta só após objetivo 7
+✓ Conclusão por resposta correta 7
+✓ Rota alcançável e coleta concluída no setor 8
+✓ Janela de câmera preserva obstáculos à frente 8
+✓ Pergunta só após objetivo 8
+✓ Conclusão por resposta correta 8
+✓ Rota alcançável e coleta concluída no setor 9
+✓ Janela de câmera preserva obstáculos à frente 9
+✓ Pergunta só após objetivo 9
+✓ Conclusão por resposta correta 9
+✓ Rota alcançável e coleta concluída no setor 10
+✓ Janela de câmera preserva obstáculos à frente 10
+✓ Pergunta só após objetivo 10
+✓ Conclusão por resposta correta 10
+✓ Rota alcançável e coleta concluída no setor 11
+✓ Janela de câmera preserva obstáculos à frente 11
+✓ Pergunta só após objetivo 11
+✓ Conclusão por resposta correta 11
+✓ Rota alcançável e coleta concluída no setor 12
+✓ Janela de câmera preserva obstáculos à frente 12
+✓ Pergunta só após objetivo 12
+✓ Conclusão por resposta correta 12
+✓ Rota alcançável e coleta concluída no setor 13
+✓ Janela de câmera preserva obstáculos à frente 13
+✓ Pergunta só após objetivo 13
+✓ Conclusão por resposta correta 13
+✓ Rota alcançável e coleta concluída no setor 14
+✓ Janela de câmera preserva obstáculos à frente 14
+✓ Pergunta só após objetivo 14
+✓ Conclusão por resposta correta 14
+✓ Rota alcançável e coleta concluída no setor 15
+✓ Janela de câmera preserva obstáculos à frente 15
+✓ Pergunta só após objetivo 15
+✓ Conclusão por resposta correta 15
+✓ Rota alcançável e coleta concluída no setor 16
+✓ Janela de câmera preserva obstáculos à frente 16
+✓ Pergunta só após objetivo 16
+✓ Conclusão por resposta correta 16
+✓ Rota alcançável e coleta concluída no setor 17
+✓ Janela de câmera preserva obstáculos à frente 17
+✓ Pergunta só após objetivo 17
+✓ Conclusão por resposta correta 17
+✓ Rota alcançável e coleta concluída no setor 18
+✓ Janela de câmera preserva obstáculos à frente 18
+✓ Pergunta só após objetivo 18
+✓ Conclusão por resposta correta 18
+✓ Rota alcançável e coleta concluída no setor 19
+✓ Janela de câmera preserva obstáculos à frente 19
+✓ Pergunta só após objetivo 19
+✓ Conclusão por resposta correta 19
+✓ Rota alcançável e coleta concluída no setor 20
+✓ Janela de câmera preserva obstáculos à frente 20
+✓ Pergunta só após objetivo 20
+✓ Conclusão por resposta correta 20
+✓ Rota alcançável e coleta concluída no setor 21
+✓ Janela de câmera preserva obstáculos à frente 21
+✓ Pergunta só após objetivo 21
+✓ Conclusão por resposta correta 21
+✓ Rota alcançável e coleta concluída no setor 22
+✓ Janela de câmera preserva obstáculos à frente 22
+✓ Pergunta só após objetivo 22
+✓ Conclusão por resposta correta 22
+✓ Rota alcançável e coleta concluída no setor 23
+✓ Janela de câmera preserva obstáculos à frente 23
+✓ Pergunta só após objetivo 23
+✓ Conclusão por resposta correta 23
+✓ Rota alcançável e coleta concluída no setor 24
+✓ Janela de câmera preserva obstáculos à frente 24
+✓ Pergunta só após objetivo 24
+✓ Conclusão por resposta correta 24
+✓ Rota alcançável e coleta concluída no setor 25
+✓ Janela de câmera preserva obstáculos à frente 25
+✓ Pergunta só após objetivo 25
+✓ Conclusão por resposta correta 25
+✓ Rota alcançável e coleta concluída no setor 26
+✓ Janela de câmera preserva obstáculos à frente 26
+✓ Pergunta só após objetivo 26
+✓ Conclusão por resposta correta 26
+✓ Rota alcançável e coleta concluída no setor 27
+✓ Janela de câmera preserva obstáculos à frente 27
+✓ Pergunta só após objetivo 27
+✓ Conclusão por resposta correta 27
+✓ Rota alcançável e coleta concluída no setor 28
+✓ Janela de câmera preserva obstáculos à frente 28
+✓ Pergunta só após objetivo 28
+✓ Conclusão por resposta correta 28
+✓ Rota alcançável e coleta concluída no setor 29
+✓ Janela de câmera preserva obstáculos à frente 29
+✓ Pergunta só após objetivo 29
+✓ Conclusão por resposta correta 29
+✓ Rota alcançável e coleta concluída no setor 30
+✓ Janela de câmera preserva obstáculos à frente 30
+✓ Pergunta só após objetivo 30
+✓ Conclusão por resposta correta 30
+✓ Chefe possui três etapas e cria minions
+✓ Ataques avisados preservam corredor de escape
+✓ Chefe derrotado após coleta final
+✓ Erro final reinicia infecção sem concluir
+✓ Chefe reinicia na etapa um
+✓ Apagar progresso restaura bloqueios e recordes
+✓ boitata: pacote cresce exatamente um segmento
+✓ boitata: histórico segue a cabeça
+✓ boitata: crescimento interpolado sem salto
+✓ boitata: corpo/cabelo participa da colisão
+✓ boitata: cauda pode sair da célula sem crescimento
+✓ boitata: obstáculo reduz vida e recompõe trilha segura
+✓ boitata: recorde individual salvo
+✓ boitata: percurso e crescimento no setor 1
+✓ boitata: percurso e crescimento no setor 2
+✓ boitata: percurso e crescimento no setor 3
+✓ boitata: percurso e crescimento no setor 4
+✓ boitata: percurso e crescimento no setor 5
+✓ boitata: percurso e crescimento no setor 6
+✓ boitata: percurso e crescimento no setor 7
+✓ boitata: percurso e crescimento no setor 8
+✓ boitata: percurso e crescimento no setor 9
+✓ boitata: percurso e crescimento no setor 10
+✓ boitata: percurso e crescimento no setor 11
+✓ boitata: percurso e crescimento no setor 12
+✓ boitata: percurso e crescimento no setor 13
+✓ boitata: percurso e crescimento no setor 14
+✓ boitata: percurso e crescimento no setor 15
+✓ boitata: percurso e crescimento no setor 16
+✓ boitata: percurso e crescimento no setor 17
+✓ boitata: percurso e crescimento no setor 18
+✓ boitata: percurso e crescimento no setor 19
+✓ boitata: percurso e crescimento no setor 20
+✓ boitata: percurso e crescimento no setor 21
+✓ boitata: percurso e crescimento no setor 22
+✓ boitata: percurso e crescimento no setor 23
+✓ boitata: percurso e crescimento no setor 24
+✓ boitata: percurso e crescimento no setor 25
+✓ boitata: percurso e crescimento no setor 26
+✓ boitata: percurso e crescimento no setor 27
+✓ boitata: percurso e crescimento no setor 28
+✓ boitata: percurso e crescimento no setor 29
+✓ boitata: percurso e crescimento no setor 30
+✓ iara: pacote cresce exatamente um segmento
+✓ iara: histórico segue a cabeça
+✓ iara: crescimento interpolado sem salto
+✓ iara: corpo/cabelo participa da colisão
+✓ iara: cauda pode sair da célula sem crescimento
+✓ iara: obstáculo reduz vida e recompõe trilha segura
+✓ iara: recorde individual salvo
+✓ iara: percurso e crescimento no setor 1
+✓ iara: percurso e crescimento no setor 2
+✓ iara: percurso e crescimento no setor 3
+✓ iara: percurso e crescimento no setor 4
+✓ iara: percurso e crescimento no setor 5
+✓ iara: percurso e crescimento no setor 6
+✓ iara: percurso e crescimento no setor 7
+✓ iara: percurso e crescimento no setor 8
+✓ iara: percurso e crescimento no setor 9
+✓ iara: percurso e crescimento no setor 10
+✓ iara: percurso e crescimento no setor 11
+✓ iara: percurso e crescimento no setor 12
+✓ iara: percurso e crescimento no setor 13
+✓ iara: percurso e crescimento no setor 14
+✓ iara: percurso e crescimento no setor 15
+✓ iara: percurso e crescimento no setor 16
+✓ iara: percurso e crescimento no setor 17
+✓ iara: percurso e crescimento no setor 18
+✓ iara: percurso e crescimento no setor 19
+✓ iara: percurso e crescimento no setor 20
+✓ iara: percurso e crescimento no setor 21
+✓ iara: percurso e crescimento no setor 22
+✓ iara: percurso e crescimento no setor 23
+✓ iara: percurso e crescimento no setor 24
+✓ iara: percurso e crescimento no setor 25
+✓ iara: percurso e crescimento no setor 26
+✓ iara: percurso e crescimento no setor 27
+✓ iara: percurso e crescimento no setor 28
+✓ iara: percurso e crescimento no setor 29
+✓ iara: percurso e crescimento no setor 30
+✓ Troca preserva campanha e persiste seleção
+✓ ID desconhecido é recusado
+✓ Migração preserva progresso e valida personagem e recordes
+✓ Crescer cabelo não deforma corpo ou cauda de Iara
+✓ Busca dirigida alcança todos os itens · fase 1
+✓ Corredor de crescimento preservado · fase 1
+✓ Semente reproduzível · fase 1
+✓ Busca dirigida alcança todos os itens · fase 2
+✓ Corredor de crescimento preservado · fase 2
+✓ Semente reproduzível · fase 2
+✓ Busca dirigida alcança todos os itens · fase 3
+✓ Corredor de crescimento preservado · fase 3
+✓ Semente reproduzível · fase 3
+✓ Busca dirigida alcança todos os itens · fase 4
+✓ Corredor de crescimento preservado · fase 4
+✓ Semente reproduzível · fase 4
+✓ Busca dirigida alcança todos os itens · fase 5
+✓ Corredor de crescimento preservado · fase 5
+✓ Semente reproduzível · fase 5
+✓ Busca dirigida alcança todos os itens · fase 6
+✓ Corredor de crescimento preservado · fase 6
+✓ Semente reproduzível · fase 6
+✓ Busca dirigida alcança todos os itens · fase 7
+✓ Corredor de crescimento preservado · fase 7
+✓ Semente reproduzível · fase 7
+✓ Busca dirigida alcança todos os itens · fase 8
+✓ Corredor de crescimento preservado · fase 8
+✓ Semente reproduzível · fase 8
+✓ Busca dirigida alcança todos os itens · fase 9
+✓ Corredor de crescimento preservado · fase 9
+✓ Semente reproduzível · fase 9
+✓ Busca dirigida alcança todos os itens · fase 10
+✓ Corredor de crescimento preservado · fase 10
+✓ Semente reproduzível · fase 10
+✓ Busca dirigida alcança todos os itens · fase 11
+✓ Corredor de crescimento preservado · fase 11
+✓ Semente reproduzível · fase 11
+✓ Busca dirigida alcança todos os itens · fase 12
+✓ Corredor de crescimento preservado · fase 12
+✓ Semente reproduzível · fase 12
+✓ Busca dirigida alcança todos os itens · fase 13
+✓ Corredor de crescimento preservado · fase 13
+✓ Semente reproduzível · fase 13
+✓ Busca dirigida alcança todos os itens · fase 14
+✓ Corredor de crescimento preservado · fase 14
+✓ Semente reproduzível · fase 14
+✓ Busca dirigida alcança todos os itens · fase 15
+✓ Corredor de crescimento preservado · fase 15
+✓ Semente reproduzível · fase 15
+✓ Busca dirigida alcança todos os itens · fase 16
+✓ Corredor de crescimento preservado · fase 16
+✓ Semente reproduzível · fase 16
+✓ Busca dirigida alcança todos os itens · fase 17
+✓ Corredor de crescimento preservado · fase 17
+✓ Semente reproduzível · fase 17
+✓ Busca dirigida alcança todos os itens · fase 18
+✓ Corredor de crescimento preservado · fase 18
+✓ Semente reproduzível · fase 18
+✓ Busca dirigida alcança todos os itens · fase 19
+✓ Corredor de crescimento preservado · fase 19
+✓ Semente reproduzível · fase 19
+✓ Busca dirigida alcança todos os itens · fase 20
+✓ Corredor de crescimento preservado · fase 20
+✓ Semente reproduzível · fase 20
+✓ Busca dirigida alcança todos os itens · fase 21
+✓ Corredor de crescimento preservado · fase 21
+✓ Semente reproduzível · fase 21
+✓ Busca dirigida alcança todos os itens · fase 22
+✓ Corredor de crescimento preservado · fase 22
+✓ Semente reproduzível · fase 22
+✓ Busca dirigida alcança todos os itens · fase 23
+✓ Corredor de crescimento preservado · fase 23
+✓ Semente reproduzível · fase 23
+✓ Busca dirigida alcança todos os itens · fase 24
+✓ Corredor de crescimento preservado · fase 24
+✓ Semente reproduzível · fase 24
+✓ Busca dirigida alcança todos os itens · fase 25
+✓ Corredor de crescimento preservado · fase 25
+✓ Semente reproduzível · fase 25
+✓ Busca dirigida alcança todos os itens · fase 26
+✓ Corredor de crescimento preservado · fase 26
+✓ Semente reproduzível · fase 26
+✓ Busca dirigida alcança todos os itens · fase 27
+✓ Corredor de crescimento preservado · fase 27
+✓ Semente reproduzível · fase 27
+✓ Busca dirigida alcança todos os itens · fase 28
+✓ Corredor de crescimento preservado · fase 28
+✓ Semente reproduzível · fase 28
+✓ Busca dirigida alcança todos os itens · fase 29
+✓ Corredor de crescimento preservado · fase 29
+✓ Semente reproduzível · fase 29
+✓ Busca dirigida alcança todos os itens · fase 30
+✓ Corredor de crescimento preservado · fase 30
+✓ Semente reproduzível · fase 30
+✓ Trinta distribuições distintas
+✓ Árvores, arbustos, rochas, troncos e água sólidos
+✓ Início seguro sem obstáculos
+✓ Água bloqueada pelo sistema físico compartilhado
+✓ boitata: ArrowLeft usa code e bloqueia rolagem
+✓ boitata: comando não depende do frame
+✓ boitata: ArrowLeft movimenta para frente
+✓ boitata: trilha segue a cabeça em frente
+✓ boitata: ArrowRight usa code e bloqueia rolagem
+✓ boitata: comando não depende do frame
+✓ boitata: ArrowRight movimenta para trás
+✓ boitata: trilha segue a cabeça em trás
+✓ boitata: ArrowDown usa code e bloqueia rolagem
+✓ boitata: comando não depende do frame
+✓ boitata: ArrowDown movimenta para esquerda
+✓ boitata: trilha segue a cabeça em esquerda
+✓ boitata: ArrowUp usa code e bloqueia rolagem
+✓ boitata: comando não depende do frame
+✓ boitata: ArrowUp movimenta para direita
+✓ boitata: trilha segue a cabeça em direita
+✓ boitata: reversão horizontal perigosa bloqueada
+✓ boitata: reversão bloqueada preserva vida
+✓ boitata: fila aceita curva dupla
+✓ boitata: retorno após curva sem inversão
+✓ boitata: câmera acompanha retorno
+✓ boitata: reversão lateral perigosa bloqueada
+✓ boitata: paused bloqueia comandos
+✓ boitata: paused bloqueia deslocamento
+✓ boitata: quiz bloqueia comandos
+✓ boitata: quiz bloqueia deslocamento
+✓ boitata: lesson bloqueia comandos
+✓ boitata: lesson bloqueia deslocamento
+✓ boitata: graphics bloqueia comandos
+✓ boitata: graphics bloqueia deslocamento
+✓ boitata: wrong bloqueia comandos
+✓ boitata: wrong bloqueia deslocamento
+✓ boitata: curva interpolada na trilha
+✓ boitata: orientação gira suavemente
+✓ boitata: coleta para trás preserva crescimento
+✓ boitata: invulnerabilidade não atravessa obstáculo
+✓ boitata: colisão para trás continua causando dano
+✓ boitata: limite inicial não inverte nem move o corpo
+✓ boitata: sai da borda com comando lateral
+✓ boitata: borda lateral não troca a direção
+✓ boitata: fila na borda não permite retornar para o pescoço
+✓ iara: ArrowLeft usa code e bloqueia rolagem
+✓ iara: comando não depende do frame
+✓ iara: ArrowLeft movimenta para frente
+✓ iara: trilha segue a cabeça em frente
+✓ iara: ArrowRight usa code e bloqueia rolagem
+✓ iara: comando não depende do frame
+✓ iara: ArrowRight movimenta para trás
+✓ iara: trilha segue a cabeça em trás
+✓ iara: ArrowDown usa code e bloqueia rolagem
+✓ iara: comando não depende do frame
+✓ iara: ArrowDown movimenta para esquerda
+✓ iara: trilha segue a cabeça em esquerda
+✓ iara: ArrowUp usa code e bloqueia rolagem
+✓ iara: comando não depende do frame
+✓ iara: ArrowUp movimenta para direita
+✓ iara: trilha segue a cabeça em direita
+✓ iara: reversão horizontal perigosa bloqueada
+✓ iara: reversão bloqueada preserva vida
+✓ iara: fila aceita curva dupla
+✓ iara: retorno após curva sem inversão
+✓ iara: câmera acompanha retorno
+✓ iara: reversão lateral perigosa bloqueada
+✓ iara: paused bloqueia comandos
+✓ iara: paused bloqueia deslocamento
+✓ iara: quiz bloqueia comandos
+✓ iara: quiz bloqueia deslocamento
+✓ iara: lesson bloqueia comandos
+✓ iara: lesson bloqueia deslocamento
+✓ iara: graphics bloqueia comandos
+✓ iara: graphics bloqueia deslocamento
+✓ iara: wrong bloqueia comandos
+✓ iara: wrong bloqueia deslocamento
+✓ iara: curva interpolada na trilha
+✓ iara: orientação gira suavemente
+✓ iara: coleta para trás preserva crescimento
+✓ iara: invulnerabilidade não atravessa obstáculo
+✓ iara: colisão para trás continua causando dano
+✓ iara: limite inicial não inverte nem move o corpo
+✓ iara: sai da borda com comando lateral
+✓ iara: borda lateral não troca a direção
+✓ iara: fila na borda não permite retornar para o pescoço
+✓ Retorno preserva itens e colisões visitados
+✓ Input desconhecido é ignorado
+✓ boitata: alvo acessível no setor 1
+✓ boitata: alvo acessível no setor 2
+✓ boitata: alvo acessível no setor 3
+✓ boitata: alvo acessível no setor 4
+✓ boitata: alvo acessível no setor 5
+✓ boitata: alvo acessível no setor 6
+✓ boitata: alvo acessível no setor 7
+✓ boitata: alvo acessível no setor 8
+✓ boitata: alvo acessível no setor 9
+✓ boitata: alvo acessível no setor 10
+✓ boitata: alvo acessível no setor 11
+✓ boitata: alvo acessível no setor 12
+✓ boitata: alvo acessível no setor 13
+✓ boitata: alvo acessível no setor 14
+✓ boitata: alvo acessível no setor 15
+✓ boitata: alvo acessível no setor 16
+✓ boitata: alvo acessível no setor 17
+✓ boitata: alvo acessível no setor 18
+✓ boitata: alvo acessível no setor 19
+✓ boitata: alvo acessível no setor 20
+✓ boitata: alvo acessível no setor 21
+✓ boitata: alvo acessível no setor 22
+✓ boitata: alvo acessível no setor 23
+✓ boitata: alvo acessível no setor 24
+✓ boitata: alvo acessível no setor 25
+✓ boitata: alvo acessível no setor 26
+✓ boitata: alvo acessível no setor 27
+✓ boitata: alvo acessível no setor 28
+✓ boitata: alvo acessível no setor 29
+✓ boitata: alvo acessível no setor 30
+✓ iara: alvo acessível no setor 1
+✓ iara: alvo acessível no setor 2
+✓ iara: alvo acessível no setor 3
+✓ iara: alvo acessível no setor 4
+✓ iara: alvo acessível no setor 5
+✓ iara: alvo acessível no setor 6
+✓ iara: alvo acessível no setor 7
+✓ iara: alvo acessível no setor 8
+✓ iara: alvo acessível no setor 9
+✓ iara: alvo acessível no setor 10
+✓ iara: alvo acessível no setor 11
+✓ iara: alvo acessível no setor 12
+✓ iara: alvo acessível no setor 13
+✓ iara: alvo acessível no setor 14
+✓ iara: alvo acessível no setor 15
+✓ iara: alvo acessível no setor 16
+✓ iara: alvo acessível no setor 17
+✓ iara: alvo acessível no setor 18
+✓ iara: alvo acessível no setor 19
+✓ iara: alvo acessível no setor 20
+✓ iara: alvo acessível no setor 21
+✓ iara: alvo acessível no setor 22
+✓ iara: alvo acessível no setor 23
+✓ iara: alvo acessível no setor 24
+✓ iara: alvo acessível no setor 25
+✓ iara: alvo acessível no setor 26
+✓ iara: alvo acessível no setor 27
+✓ iara: alvo acessível no setor 28
+✓ iara: alvo acessível no setor 29
+✓ iara: alvo acessível no setor 30
+✓ Fugitivo tem intervalo maior que o do jogador
+✓ Fugitivo não acompanha a velocidade do jogador
+✓ Fugitivo escolhe fuga afastando-se da cabeça
+✓ Teletransporte 1 inicia com aviso
+✓ Destino 1 respeita corpo, obstáculos e alcance
+✓ Aviso não teleporta instantaneamente 1
+✓ Teletransporte 1 consome uma carga
+✓ Intervalo entre teletransportes respeitado 1
+✓ Teletransporte 2 inicia com aviso
+✓ Destino 2 respeita corpo, obstáculos e alcance
+✓ Aviso não teleporta instantaneamente 2
+✓ Teletransporte 2 consome uma carga
+✓ Intervalo entre teletransportes respeitado 2
+✓ Teletransporte 3 inicia com aviso
+✓ Destino 3 respeita corpo, obstáculos e alcance
+✓ Aviso não teleporta instantaneamente 3
+✓ Teletransporte 3 consome uma carga
+✓ Intervalo entre teletransportes respeitado 3
+✓ Quarto teletransporte bloqueado
+✓ Nova tentativa restaura três cargas
+✓ Aviso pode ser iniciado para testar destino ocupado
+✓ Destino bloqueado durante aviso cancela o salto sem consumir carga
+✓ A* contorna parede
+✓ Fugitivo cabe em corredor estreito
+✓ Predador não cabe no mesmo corredor
+✓ Temporizador do setor 1
+✓ Temporizador do setor 5
+✓ Temporizador do setor 6
+✓ Temporizador do setor 15
+✓ Temporizador do setor 16
+✓ Temporizador do setor 25
+✓ Temporizador do setor 26
+✓ Temporizador do setor 30
+✓ Pausa congela a perseguição
+✓ Predador aguarda o prazo
+✓ Predador surge no prazo e em posição válida
+✓ Entrada antecede perseguição
+✓ Predador respeita geometria no passo 0
+✓ Predador respeita geometria no passo 1
+✓ Predador respeita geometria no passo 2
+✓ Predador respeita geometria no passo 3
+✓ Predador respeita geometria no passo 4
+✓ Predador respeita geometria no passo 5
+✓ Predador respeita geometria no passo 6
+✓ Predador respeita geometria no passo 7
+✓ Predador se aproxima por caminho válido
+✓ boitata: ataque tem animação 0
+✓ boitata: exatamente uma vida por ataque 0
+✓ boitata: dano não duplica vírus 0
+✓ boitata: predador desaparece após dano 0
+✓ boitata: proteção e timer reiniciados 0
+✓ boitata: novo ciclo aguarda 0
+✓ boitata: ataque tem animação 1
+✓ boitata: exatamente uma vida por ataque 1
+✓ boitata: dano não duplica vírus 1
+✓ boitata: predador desaparece após dano 1
+✓ boitata: proteção e timer reiniciados 1
+✓ boitata: novo ciclo aguarda 1
+✓ boitata: ataque tem animação 2
+✓ boitata: exatamente uma vida por ataque 2
+✓ boitata: dano não duplica vírus 2
+✓ boitata: terceira vida termina a tentativa
+✓ boitata: repetir preserva setor e total
+✓ boitata: só pacotes não concluem
+✓ boitata: captura detectada
+✓ boitata: captura pontua uma única vez
+✓ boitata: captura congela inimigos
+✓ boitata: captura inicial salva e desbloqueia
+✓ boitata: captura abre pergunta sem concluir
+✓ boitata: resposta errada duplica
+✓ boitata: erro reinicia captura e cargas
+✓ boitata: resposta certa conclui após captura
+✓ iara: ataque tem animação 0
+✓ iara: exatamente uma vida por ataque 0
+✓ iara: dano não duplica vírus 0
+✓ iara: predador desaparece após dano 0
+✓ iara: proteção e timer reiniciados 0
+✓ iara: novo ciclo aguarda 0
+✓ iara: ataque tem animação 1
+✓ iara: exatamente uma vida por ataque 1
+✓ iara: dano não duplica vírus 1
+✓ iara: predador desaparece após dano 1
+✓ iara: proteção e timer reiniciados 1
+✓ iara: novo ciclo aguarda 1
+✓ iara: ataque tem animação 2
+✓ iara: exatamente uma vida por ataque 2
+✓ iara: dano não duplica vírus 2
+✓ iara: terceira vida termina a tentativa
+✓ iara: repetir preserva setor e total
+✓ iara: só pacotes não concluem
+✓ iara: captura detectada
+✓ iara: captura pontua uma única vez
+✓ iara: captura congela inimigos
+✓ iara: captura inicial salva e desbloqueia
+✓ iara: captura abre pergunta sem concluir
+✓ iara: resposta errada duplica
+✓ iara: erro reinicia captura e cargas
+✓ iara: resposta certa conclui após captura
+✓ Captura final neutraliza núcleo e exige pergunta
+✓ boitata: perseguição real captura alvo móvel no setor 1
+✓ boitata: perseguição real captura alvo móvel no setor 6
+✓ boitata: perseguição real captura alvo móvel no setor 16
+✓ boitata: perseguição real captura alvo móvel no setor 26
+✓ boitata: perseguição real captura alvo móvel no setor 30
+✓ iara: perseguição real captura alvo móvel no setor 1
+✓ iara: perseguição real captura alvo móvel no setor 6
+✓ iara: perseguição real captura alvo móvel no setor 16
+✓ iara: perseguição real captura alvo móvel no setor 26
+✓ iara: perseguição real captura alvo móvel no setor 30
+
+568/568 verificações aprovadas</pre><script>window.addEventListener("error",e=>{document.body.dataset.error=e.message;});</script>
+<script src="../js/save.js"></script><script src="../js/characters.js"></script><script src="../js/boitata.js"></script><script src="../js/iara.js"></script><script src="../js/mesh.js"></script><script src="../js/characterSelection.js"></script><script src="../js/levels.js"></script><script src="../js/questions.js"></script><script src="../js/maps.js"></script><script src="../js/movement.js"></script><script src="../js/collisions.js"></script><script src="../js/player.js"></script><script src="../js/enemies.js"></script><script src="../js/boss.js"></script><script src="../js/education.js"></script><script src="../js/pathfinding.js"></script><script src="../js/virusAI.js"></script><script src="../js/teleport.js"></script><script src="../js/fugitiveVirus.js"></script><script src="../js/chaseTimer.js"></script><script src="../js/predatorVirus.js"></script><script src="../js/captureSystem.js"></script><script src="../js/virusVisuals.js"></script><script src="../js/game.js"></script><script src="suite.js"></script><script src="characters.js"></script><script src="forest.js"></script><script src="movement.js"></script><script src="chase.js"></script><script>const results=[...runBoitataTests(),...runCharacterTests(),...runForestTests(),...runMovementTests(),...runChaseTests()];document.getElementById('results').textContent=results.map(r=>(r.passed?'✓ ':'✗ ')+r.test).join('\n')+'\n\n'+results.filter(r=>r.passed).length+'/'+results.length+' verificações aprovadas';</script>
+</body></html>

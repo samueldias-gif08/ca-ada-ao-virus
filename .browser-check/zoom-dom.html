@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="pt-BR" style="--accent: #479fff;"><head><base href="../"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BOITATÁ — A Serpente Digital</title><link rel="stylesheet" href="css/style.css"></head>
+<body class="arena-active" data-tests="{&quot;passed&quot;:1678,&quot;total&quot;:1678,&quot;failed&quot;:[],&quot;calls&quot;:116,&quot;triangles&quot;:90086}"><header><a class="brand" href="index.html">◈ BOITATÁ<span>A SERPENTE DIGITAL</span></a><div class="status"><i></i> SISTEMA DE DEFESA ATIVO</div><button id="help">Como jogar ↗</button></header>
+<main><div class="eyebrow">UMA LENDA BRASILEIRA. UMA NOVA MISSÃO.</div><div class="heading"><div><h1>Proteja a rede.<br><em>Acenda sua lenda.</em></h1><p>Entre nos circuitos. Recupere os dados. Domine a rede.</p></div><div class="mission">OPERAÇÃO BOITATÁ <b>30</b><span>SETORES PARA RECUPERAR</span></div></div>
+<section class="console"><div class="toolbar"><div><span class="live">●</span> <b id="sector">01 / HARDWARE</b><small id="location">INTERIOR DO COMPUTADOR · Iniciante</small></div><div class="tools"><button id="music">Música: off</button><button id="sound">Efeitos: off</button><button id="pause">Ⅱ Pausar</button><button id="levels">▦ Fases</button></div></div>
+<div class="hud"><div>INTEGRIDADE<b id="lives">♥ ♥ ♥ </b></div><div>PACOTES<b id="packets">0 coletados</b></div><div>PONTUAÇÃO<b id="score">000000</b></div><div>VÍRUS · TOTAL / ATIVOS<b id="viruses" title="0 já entraram · 2 na fila · 0 ciclos encerrados">2 / 0</b></div><div>ERROS<b id="errors">0</b></div></div>
+<div class="chase-hud"><span id="chase-character">Boitatá</span><span id="fugitive-state">Fugitivo: PATRULHANDO</span><span id="predator-timer">Predador: PERSEGUINDO</span><span id="fugitive-location">Alvo a 14 passos</span></div><div class="viewport"><div id="chase-notice" role="status" class="chase-notice">O PREDADOR ESTÁ CAÇANDO VOCÊ!</div><canvas id="game" width="1344" height="554" aria-label="Arena isométrica dos guardiões Boitatá e Iara" data-engine="three.js r160"></canvas><div class="arena-label"><span id="zone">SETOR 1 · 0m</span><span id="speed">VELOCIDADE 1.0×</span></div><div id="overlay" class="overlay hidden"><div class="panel"><div class="tag">ARQUIVO DE CONHECIMENTO / 1</div><h2>Hardware</h2><p>Capture o Vírus Fugitivo para concluir a missão. Colete pacotes para crescer. Depois do tempo limite, o Predador começará a caçar você.</p><p style="text-align:left"><b>Hardware é a parte física do computador</b>: tudo aquilo que pode ser tocado, como placa-mãe, processador, memória e dispositivos de armazenamento. O processador executa instruções e realiza cálculos. A memória RAM guarda temporariamente os dados usados pelos programas; seu conteúdo normalmente se perde quando o computador é desligado. O SSD ou disco rígido armazena arquivos de forma persistente. A placa-mãe conecta os componentes e permite que troquem informações. Dispositivos de entrada, como teclado e mouse, enviam comandos. Dispositivos de saída, como monitor e impressora, apresentam resultados. A placa de rede permite a conexão com outros equipamentos. Esses componentes trabalham juntos: nenhum realiza sozinho todas as tarefas. Nesta missão, imagine os pacotes atravessando os circuitos e proteja o caminho contra as ameaças digitais.</p><div class="actions"><button class="primary">Entendi, começar fase</button></div></div></div></div>
+<div class="fullscreen-control"><button id="fullscreen-button" aria-label="Alternar tela cheia">Tela<br>cheia</button></div><span id="graphics-status" role="status" hidden="">Alto · 1344 × 554 · 36 FPS</span><div class="progress"><div id="bar" style="width: 0%;"></div></div></section>
+<div class="below"><span><b>01 — 05</b> APRENDA EXPLORANDO</span><span><b>06 — 30</b> TESTE SEU CONHECIMENTO</span><span>SEU PROGRESSO É SALVO NESTE NAVEGADOR ◈</span></div><nav class="touch" aria-label="Controles de movimento"><button data-code="KeyW" aria-label="Lado esquerdo">W</button><button data-code="KeyZ" aria-label="Lado direito">Z</button><button data-code="KeyS" aria-label="Frente">S</button><button data-code="KeyA" aria-label="Trás">A</button></nav></main><footer class="page-footer">BOITATÁ / PROTOCOLO DE PROTEÇÃO <span>FOLCLORE BRASILEIRO × EDUCAÇÃO DIGITAL</span></footer>
+<script src="js/save.js"></script><script src="js/characters.js"></script><script src="js/boitata.js"></script><script src="js/iara.js"></script><script src="js/mesh.js"></script><script src="js/characterSelection.js"></script><script src="js/questions.js"></script><script src="js/levels.js"></script><script src="js/maps.js"></script><script src="js/movement.js"></script><script src="js/collisions.js"></script><script src="js/player.js"></script><script src="js/enemies.js"></script><script src="js/boss.js"></script><script src="js/education.js"></script><script src="js/audio.js"></script><script src="js/interface.js"></script><script src="js/chaseUI.js"></script><script src="js/renderer.js"></script><script src="js/pathfinding.js"></script><script src="js/virusAI.js"></script><script src="js/fugitiveVirus.js"></script><script src="js/chaseTimer.js"></script><script src="js/predatorVirus.js"></script><script src="js/captureSystem.js"></script><script src="js/virusVisuals.js"></script><script src="js/game.js"></script><script src="vendor/three.min.js"></script><script src="js/forest3d.js"></script><script src="js/graphics.js"></script><script src="js/main.js"></script><script src="tests/suite.js"></script><script src="tests/characters.js"></script><script src="tests/forest.js"></script><script src="tests/movement.js"></script><script src="tests/chase.js"></script><script src="tests/arena.js"></script><script src="tests/redesign.js"></script><script src="tests/webgl.js"></script><pre id="test-output" style="white-space: pre-wrap; margin: 20px; color: rgb(215, 236, 205);">✓ Exatamente 30 fases e 30 cores
+✓ Banco com pelo menos 50 perguntas e IDs únicos
+✓ Cada tema avaliado tem pelo menos duas perguntas
+✓ Cinco resumos com 100–150 palavras
+✓ Fase bloqueada recusada pela lógica
+✓ Avanço automático e reversão para o corpo bloqueada
+✓ Inversão vertical imediata bloqueada
+✓ Corpo acompanha o caminho
+✓ Coleta aumenta corpo, objetivo e pontos
+✓ Colisão com vírus reduz vida e protege temporariamente
+✓ Derrota não duplica vírus
+✓ Repetir após derrota mantém total
+✓ Duplicação acumulada 1
+✓ Duplicação acumulada 2
+✓ Duplicação acumulada 3
+✓ Duplicação acumulada 4
+✓ Perguntas não se repetem imediatamente
+✓ Erros e áudio persistem
+✓ Acerto desbloqueia próxima, salva conclusão e zera erros
+✓ Ondas respeitam limite sem truncar total
+✓ Spawn não ocorre sobre corpo, item ou obstáculo
+✓ 30 layouts com geometria distinta
+✓ Arena finita e itens acessíveis 1
+✓ Sem pergunta obrigatória 1
+✓ Arena finita e itens acessíveis 2
+✓ Sem pergunta obrigatória 2
+✓ Arena finita e itens acessíveis 3
+✓ Sem pergunta obrigatória 3
+✓ Arena finita e itens acessíveis 4
+✓ Sem pergunta obrigatória 4
+✓ Arena finita e itens acessíveis 5
+✓ Sem pergunta obrigatória 5
+✓ Arena finita e itens acessíveis 6
+✓ Pergunta só após objetivo 6
+✓ Conclusão por resposta correta 6
+✓ Arena finita e itens acessíveis 7
+✓ Pergunta só após objetivo 7
+✓ Conclusão por resposta correta 7
+✓ Arena finita e itens acessíveis 8
+✓ Pergunta só após objetivo 8
+✓ Conclusão por resposta correta 8
+✓ Arena finita e itens acessíveis 9
+✓ Pergunta só após objetivo 9
+✓ Conclusão por resposta correta 9
+✓ Arena finita e itens acessíveis 10
+✓ Pergunta só após objetivo 10
+✓ Conclusão por resposta correta 10
+✓ Arena finita e itens acessíveis 11
+✓ Pergunta só após objetivo 11
+✓ Conclusão por resposta correta 11
+✓ Arena finita e itens acessíveis 12
+✓ Pergunta só após objetivo 12
+✓ Conclusão por resposta correta 12
+✓ Arena finita e itens acessíveis 13
+✓ Pergunta só após objetivo 13
+✓ Conclusão por resposta correta 13
+✓ Arena finita e itens acessíveis 14
+✓ Pergunta só após objetivo 14
+✓ Conclusão por resposta correta 14
+✓ Arena finita e itens acessíveis 15
+✓ Pergunta só após objetivo 15
+✓ Conclusão por resposta correta 15
+✓ Arena finita e itens acessíveis 16
+✓ Pergunta só após objetivo 16
+✓ Conclusão por resposta correta 16
+✓ Arena finita e itens acessíveis 17
+✓ Pergunta só após objetivo 17
+✓ Conclusão por resposta correta 17
+✓ Arena finita e itens acessíveis 18
+✓ Pergunta só após objetivo 18
+✓ Conclusão por resposta correta 18
+✓ Arena finita e itens acessíveis 19
+✓ Pergunta só após objetivo 19
+✓ Conclusão por resposta correta 19
+✓ Arena finita e itens acessíveis 20
+✓ Pergunta só após objetivo 20
+✓ Conclusão por resposta correta 20
+✓ Arena finita e itens acessíveis 21
+✓ Pergunta só após objetivo 21
+✓ Conclusão por resposta correta 21
+✓ Arena finita e itens acessíveis 22
+✓ Pergunta só após objetivo 22
+✓ Conclusão por resposta correta 22
+✓ Arena finita e itens acessíveis 23
+✓ Pergunta só após objetivo 23
+✓ Conclusão por resposta correta 23
+✓ Arena finita e itens acessíveis 24
+✓ Pergunta só após objetivo 24
+✓ Conclusão por resposta correta 24
+✓ Arena finita e itens acessíveis 25
+✓ Pergunta só após objetivo 25
+✓ Conclusão por resposta correta 25
+✓ Arena finita e itens acessíveis 26
+✓ Pergunta só após objetivo 26
+✓ Conclusão por resposta correta 26
+✓ Arena finita e itens acessíveis 27
+✓ Pergunta só após objetivo 27
+✓ Conclusão por resposta correta 27
+✓ Arena finita e itens acessíveis 28
+✓ Pergunta só após objetivo 28
+✓ Conclusão por resposta correta 28
+✓ Arena finita e itens acessíveis 29
+✓ Pergunta só após objetivo 29
+✓ Conclusão por resposta correta 29
+✓ Arena finita e itens acessíveis 30
+✓ Pergunta só após objetivo 30
+✓ Conclusão por resposta correta 30
+✓ Chefe possui três etapas e cria minions
+✓ Ataques avisados preservam corredor de escape
+✓ Chefe derrotado após coleta final
+✓ Erro final reinicia infecção sem concluir
+✓ Chefe reinicia na etapa um
+✓ Apagar progresso restaura bloqueios e recordes
+✓ boitata: pacote cresce exatamente um segmento
+✓ boitata: histórico segue a cabeça
+✓ boitata: crescimento interpolado sem salto
+✓ boitata: corpo/cabelo participa da colisão
+✓ boitata: cauda pode sair da célula sem crescimento
+✓ boitata: obstáculo reduz vida e recompõe trilha segura
+✓ boitata: recorde individual salvo
+✓ boitata: trilha e posições seguras no setor 1
+✓ boitata: trilha e posições seguras no setor 2
+✓ boitata: trilha e posições seguras no setor 3
+✓ boitata: trilha e posições seguras no setor 4
+✓ boitata: trilha e posições seguras no setor 5
+✓ boitata: trilha e posições seguras no setor 6
+✓ boitata: trilha e posições seguras no setor 7
+✓ boitata: trilha e posições seguras no setor 8
+✓ boitata: trilha e posições seguras no setor 9
+✓ boitata: trilha e posições seguras no setor 10
+✓ boitata: trilha e posições seguras no setor 11
+✓ boitata: trilha e posições seguras no setor 12
+✓ boitata: trilha e posições seguras no setor 13
+✓ boitata: trilha e posições seguras no setor 14
+✓ boitata: trilha e posições seguras no setor 15
+✓ boitata: trilha e posições seguras no setor 16
+✓ boitata: trilha e posições seguras no setor 17
+✓ boitata: trilha e posições seguras no setor 18
+✓ boitata: trilha e posições seguras no setor 19
+✓ boitata: trilha e posições seguras no setor 20
+✓ boitata: trilha e posições seguras no setor 21
+✓ boitata: trilha e posições seguras no setor 22
+✓ boitata: trilha e posições seguras no setor 23
+✓ boitata: trilha e posições seguras no setor 24
+✓ boitata: trilha e posições seguras no setor 25
+✓ boitata: trilha e posições seguras no setor 26
+✓ boitata: trilha e posições seguras no setor 27
+✓ boitata: trilha e posições seguras no setor 28
+✓ boitata: trilha e posições seguras no setor 29
+✓ boitata: trilha e posições seguras no setor 30
+✓ iara: pacote cresce exatamente um segmento
+✓ iara: histórico segue a cabeça
+✓ iara: crescimento interpolado sem salto
+✓ iara: corpo/cabelo participa da colisão
+✓ iara: cauda pode sair da célula sem crescimento
+✓ iara: obstáculo reduz vida e recompõe trilha segura
+✓ iara: recorde individual salvo
+✓ iara: trilha e posições seguras no setor 1
+✓ iara: trilha e posições seguras no setor 2
+✓ iara: trilha e posições seguras no setor 3
+✓ iara: trilha e posições seguras no setor 4
+✓ iara: trilha e posições seguras no setor 5
+✓ iara: trilha e posições seguras no setor 6
+✓ iara: trilha e posições seguras no setor 7
+✓ iara: trilha e posições seguras no setor 8
+✓ iara: trilha e posições seguras no setor 9
+✓ iara: trilha e posições seguras no setor 10
+✓ iara: trilha e posições seguras no setor 11
+✓ iara: trilha e posições seguras no setor 12
+✓ iara: trilha e posições seguras no setor 13
+✓ iara: trilha e posições seguras no setor 14
+✓ iara: trilha e posições seguras no setor 15
+✓ iara: trilha e posições seguras no setor 16
+✓ iara: trilha e posições seguras no setor 17
+✓ iara: trilha e posições seguras no setor 18
+✓ iara: trilha e posições seguras no setor 19
+✓ iara: trilha e posições seguras no setor 20
+✓ iara: trilha e posições seguras no setor 21
+✓ iara: trilha e posições seguras no setor 22
+✓ iara: trilha e posições seguras no setor 23
+✓ iara: trilha e posições seguras no setor 24
+✓ iara: trilha e posições seguras no setor 25
+✓ iara: trilha e posições seguras no setor 26
+✓ iara: trilha e posições seguras no setor 27
+✓ iara: trilha e posições seguras no setor 28
+✓ iara: trilha e posições seguras no setor 29
+✓ iara: trilha e posições seguras no setor 30
+✓ Troca preserva campanha e persiste seleção
+✓ ID desconhecido é recusado
+✓ Migração preserva progresso e valida personagem e recordes
+✓ Crescer cabelo não deforma corpo ou cauda de Iara
+✓ Busca dirigida alcança todos os itens · fase 1
+✓ Corredor de crescimento preservado · fase 1
+✓ Semente reproduzível · fase 1
+✓ Busca dirigida alcança todos os itens · fase 2
+✓ Corredor de crescimento preservado · fase 2
+✓ Semente reproduzível · fase 2
+✓ Busca dirigida alcança todos os itens · fase 3
+✓ Corredor de crescimento preservado · fase 3
+✓ Semente reproduzível · fase 3
+✓ Busca dirigida alcança todos os itens · fase 4
+✓ Corredor de crescimento preservado · fase 4
+✓ Semente reproduzível · fase 4
+✓ Busca dirigida alcança todos os itens · fase 5
+✓ Corredor de crescimento preservado · fase 5
+✓ Semente reproduzível · fase 5
+✓ Busca dirigida alcança todos os itens · fase 6
+✓ Corredor de crescimento preservado · fase 6
+✓ Semente reproduzível · fase 6
+✓ Busca dirigida alcança todos os itens · fase 7
+✓ Corredor de crescimento preservado · fase 7
+✓ Semente reproduzível · fase 7
+✓ Busca dirigida alcança todos os itens · fase 8
+✓ Corredor de crescimento preservado · fase 8
+✓ Semente reproduzível · fase 8
+✓ Busca dirigida alcança todos os itens · fase 9
+✓ Corredor de crescimento preservado · fase 9
+✓ Semente reproduzível · fase 9
+✓ Busca dirigida alcança todos os itens · fase 10
+✓ Corredor de crescimento preservado · fase 10
+✓ Semente reproduzível · fase 10
+✓ Busca dirigida alcança todos os itens · fase 11
+✓ Corredor de crescimento preservado · fase 11
+✓ Semente reproduzível · fase 11
+✓ Busca dirigida alcança todos os itens · fase 12
+✓ Corredor de crescimento preservado · fase 12
+✓ Semente reproduzível · fase 12
+✓ Busca dirigida alcança todos os itens · fase 13
+✓ Corredor de crescimento preservado · fase 13
+✓ Semente reproduzível · fase 13
+✓ Busca dirigida alcança todos os itens · fase 14
+✓ Corredor de crescimento preservado · fase 14
+✓ Semente reproduzível · fase 14
+✓ Busca dirigida alcança todos os itens · fase 15
+✓ Corredor de crescimento preservado · fase 15
+✓ Semente reproduzível · fase 15
+✓ Busca dirigida alcança todos os itens · fase 16
+✓ Corredor de crescimento preservado · fase 16
+✓ Semente reproduzível · fase 16
+✓ Busca dirigida alcança todos os itens · fase 17
+✓ Corredor de crescimento preservado · fase 17
+✓ Semente reproduzível · fase 17
+✓ Busca dirigida alcança todos os itens · fase 18
+✓ Corredor de crescimento preservado · fase 18
+✓ Semente reproduzível · fase 18
+✓ Busca dirigida alcança todos os itens · fase 19
+✓ Corredor de crescimento preservado · fase 19
+✓ Semente reproduzível · fase 19
+✓ Busca dirigida alcança todos os itens · fase 20
+✓ Corredor de crescimento preservado · fase 20
+✓ Semente reproduzível · fase 20
+✓ Busca dirigida alcança todos os itens · fase 21
+✓ Corredor de crescimento preservado · fase 21
+✓ Semente reproduzível · fase 21
+✓ Busca dirigida alcança todos os itens · fase 22
+✓ Corredor de crescimento preservado · fase 22
+✓ Semente reproduzível · fase 22
+✓ Busca dirigida alcança todos os itens · fase 23
+✓ Corredor de crescimento preservado · fase 23
+✓ Semente reproduzível · fase 23
+✓ Busca dirigida alcança todos os itens · fase 24
+✓ Corredor de crescimento preservado · fase 24
+✓ Semente reproduzível · fase 24
+✓ Busca dirigida alcança todos os itens · fase 25
+✓ Corredor de crescimento preservado · fase 25
+✓ Semente reproduzível · fase 25
+✓ Busca dirigida alcança todos os itens · fase 26
+✓ Corredor de crescimento preservado · fase 26
+✓ Semente reproduzível · fase 26
+✓ Busca dirigida alcança todos os itens · fase 27
+✓ Corredor de crescimento preservado · fase 27
+✓ Semente reproduzível · fase 27
+✓ Busca dirigida alcança todos os itens · fase 28
+✓ Corredor de crescimento preservado · fase 28
+✓ Semente reproduzível · fase 28
+✓ Busca dirigida alcança todos os itens · fase 29
+✓ Corredor de crescimento preservado · fase 29
+✓ Semente reproduzível · fase 29
+✓ Busca dirigida alcança todos os itens · fase 30
+✓ Corredor de crescimento preservado · fase 30
+✓ Semente reproduzível · fase 30
+✓ Trinta distribuições distintas
+✓ Árvores, arbustos, rochas, troncos e água sólidos
+✓ Início seguro sem obstáculos
+✓ Água bloqueada pelo sistema físico compartilhado
+✓ boitata: KeyS usa code e bloqueia rolagem
+✓ boitata: comando não depende do frame
+✓ boitata: KeyS movimenta para frente
+✓ boitata: trilha segue a cabeça em frente
+✓ boitata: KeyA usa code e bloqueia rolagem
+✓ boitata: comando não depende do frame
+✓ boitata: KeyA movimenta para trás
+✓ boitata: trilha segue a cabeça em trás
+✓ boitata: KeyW usa code e bloqueia rolagem
+✓ boitata: comando não depende do frame
+✓ boitata: KeyW movimenta para esquerda
+✓ boitata: trilha segue a cabeça em esquerda
+✓ boitata: KeyZ usa code e bloqueia rolagem
+✓ boitata: comando não depende do frame
+✓ boitata: KeyZ movimenta para direita
+✓ boitata: trilha segue a cabeça em direita
+✓ boitata: reversão horizontal perigosa bloqueada
+✓ boitata: reversão bloqueada preserva vida
+✓ boitata: fila aceita curva dupla
+✓ boitata: retorno após curva sem inversão
+✓ boitata: câmera permanece fixa no retorno
+✓ boitata: reversão lateral perigosa bloqueada
+✓ boitata: paused bloqueia comandos
+✓ boitata: paused bloqueia deslocamento
+✓ boitata: quiz bloqueia comandos
+✓ boitata: quiz bloqueia deslocamento
+✓ boitata: lesson bloqueia comandos
+✓ boitata: lesson bloqueia deslocamento
+✓ boitata: graphics bloqueia comandos
+✓ boitata: graphics bloqueia deslocamento
+✓ boitata: wrong bloqueia comandos
+✓ boitata: wrong bloqueia deslocamento
+✓ boitata: curva interpolada na trilha
+✓ boitata: orientação gira suavemente
+✓ boitata: coleta para trás preserva crescimento
+✓ boitata: invulnerabilidade não atravessa obstáculo
+✓ boitata: colisão para trás continua causando dano
+✓ boitata: limite inicial não inverte nem move o corpo
+✓ boitata: sai da borda com comando lateral
+✓ boitata: borda lateral não troca a direção
+✓ boitata: fila na borda não permite retornar para o pescoço
+✓ iara: KeyS usa code e bloqueia rolagem
+✓ iara: comando não depende do frame
+✓ iara: KeyS movimenta para frente
+✓ iara: trilha segue a cabeça em frente
+✓ iara: KeyA usa code e bloqueia rolagem
+✓ iara: comando não depende do frame
+✓ iara: KeyA movimenta para trás
+✓ iara: trilha segue a cabeça em trás
+✓ iara: KeyW usa code e bloqueia rolagem
+✓ iara: comando não depende do frame
+✓ iara: KeyW movimenta para esquerda
+✓ iara: trilha segue a cabeça em esquerda
+✓ iara: KeyZ usa code e bloqueia rolagem
+✓ iara: comando não depende do frame
+✓ iara: KeyZ movimenta para direita
+✓ iara: trilha segue a cabeça em direita
+✓ iara: reversão horizontal perigosa bloqueada
+✓ iara: reversão bloqueada preserva vida
+✓ iara: fila aceita curva dupla
+✓ iara: retorno após curva sem inversão
+✓ iara: câmera permanece fixa no retorno
+✓ iara: reversão lateral perigosa bloqueada
+✓ iara: paused bloqueia comandos
+✓ iara: paused bloqueia deslocamento
+✓ iara: quiz bloqueia comandos
+✓ iara: quiz bloqueia deslocamento
+✓ iara: lesson bloqueia comandos
+✓ iara: lesson bloqueia deslocamento
+✓ iara: graphics bloqueia comandos
+✓ iara: graphics bloqueia deslocamento
+✓ iara: wrong bloqueia comandos
+✓ iara: wrong bloqueia deslocamento
+✓ iara: curva interpolada na trilha
+✓ iara: orientação gira suavemente
+✓ iara: coleta para trás preserva crescimento
+✓ iara: invulnerabilidade não atravessa obstáculo
+✓ iara: colisão para trás continua causando dano
+✓ iara: limite inicial não inverte nem move o corpo
+✓ iara: sai da borda com comando lateral
+✓ iara: borda lateral não troca a direção
+✓ iara: fila na borda não permite retornar para o pescoço
+✓ Retorno preserva itens e colisões visitados
+✓ Input desconhecido é ignorado
+✓ boitata: alvo acessível no setor 1
+✓ boitata: alvo acessível no setor 2
+✓ boitata: alvo acessível no setor 3
+✓ boitata: alvo acessível no setor 4
+✓ boitata: alvo acessível no setor 5
+✓ boitata: alvo acessível no setor 6
+✓ boitata: alvo acessível no setor 7
+✓ boitata: alvo acessível no setor 8
+✓ boitata: alvo acessível no setor 9
+✓ boitata: alvo acessível no setor 10
+✓ boitata: alvo acessível no setor 11
+✓ boitata: alvo acessível no setor 12
+✓ boitata: alvo acessível no setor 13
+✓ boitata: alvo acessível no setor 14
+✓ boitata: alvo acessível no setor 15
+✓ boitata: alvo acessível no setor 16
+✓ boitata: alvo acessível no setor 17
+✓ boitata: alvo acessível no setor 18
+✓ boitata: alvo acessível no setor 19
+✓ boitata: alvo acessível no setor 20
+✓ boitata: alvo acessível no setor 21
+✓ boitata: alvo acessível no setor 22
+✓ boitata: alvo acessível no setor 23
+✓ boitata: alvo acessível no setor 24
+✓ boitata: alvo acessível no setor 25
+✓ boitata: alvo acessível no setor 26
+✓ boitata: alvo acessível no setor 27
+✓ boitata: alvo acessível no setor 28
+✓ boitata: alvo acessível no setor 29
+✓ boitata: alvo acessível no setor 30
+✓ iara: alvo acessível no setor 1
+✓ iara: alvo acessível no setor 2
+✓ iara: alvo acessível no setor 3
+✓ iara: alvo acessível no setor 4
+✓ iara: alvo acessível no setor 5
+✓ iara: alvo acessível no setor 6
+✓ iara: alvo acessível no setor 7
+✓ iara: alvo acessível no setor 8
+✓ iara: alvo acessível no setor 9
+✓ iara: alvo acessível no setor 10
+✓ iara: alvo acessível no setor 11
+✓ iara: alvo acessível no setor 12
+✓ iara: alvo acessível no setor 13
+✓ iara: alvo acessível no setor 14
+✓ iara: alvo acessível no setor 15
+✓ iara: alvo acessível no setor 16
+✓ iara: alvo acessível no setor 17
+✓ iara: alvo acessível no setor 18
+✓ iara: alvo acessível no setor 19
+✓ iara: alvo acessível no setor 20
+✓ iara: alvo acessível no setor 21
+✓ iara: alvo acessível no setor 22
+✓ iara: alvo acessível no setor 23
+✓ iara: alvo acessível no setor 24
+✓ iara: alvo acessível no setor 25
+✓ iara: alvo acessível no setor 26
+✓ iara: alvo acessível no setor 27
+✓ iara: alvo acessível no setor 28
+✓ iara: alvo acessível no setor 29
+✓ iara: alvo acessível no setor 30
+✓ Fugitivo tem intervalo maior que o do jogador
+✓ Fugitivo não acompanha a velocidade do jogador
+✓ Fugitivo escolhe fuga afastando-se da cabeça
+✓ Teletransporte removido
+✓ A* contorna parede
+✓ Fugitivo cabe em corredor estreito
+✓ Predador não cabe no mesmo corredor
+✓ Temporizador do setor 1
+✓ Temporizador do setor 5
+✓ Temporizador do setor 6
+✓ Temporizador do setor 15
+✓ Temporizador do setor 16
+✓ Temporizador do setor 25
+✓ Temporizador do setor 26
+✓ Temporizador do setor 30
+✓ Pausa congela a perseguição
+✓ Predador aguarda o prazo
+✓ Predador surge no prazo e em posição válida
+✓ Entrada antecede perseguição
+✓ Predador respeita geometria no passo 0
+✓ Predador respeita geometria no passo 1
+✓ Predador respeita geometria no passo 2
+✓ Predador respeita geometria no passo 3
+✓ Predador respeita geometria no passo 4
+✓ Predador respeita geometria no passo 5
+✓ Predador respeita geometria no passo 6
+✓ Predador respeita geometria no passo 7
+✓ Predador se aproxima por caminho válido
+✓ boitata: ataque tem animação 0
+✓ boitata: exatamente uma vida por ataque 0
+✓ boitata: dano não duplica vírus 0
+✓ boitata: predador desaparece após dano 0
+✓ boitata: proteção e timer reiniciados 0
+✓ boitata: novo ciclo aguarda 0
+✓ boitata: ataque tem animação 1
+✓ boitata: exatamente uma vida por ataque 1
+✓ boitata: dano não duplica vírus 1
+✓ boitata: predador desaparece após dano 1
+✓ boitata: proteção e timer reiniciados 1
+✓ boitata: novo ciclo aguarda 1
+✓ boitata: ataque tem animação 2
+✓ boitata: exatamente uma vida por ataque 2
+✓ boitata: dano não duplica vírus 2
+✓ boitata: terceira vida termina a tentativa
+✓ boitata: repetir preserva setor e total
+✓ boitata: só pacotes não concluem
+✓ boitata: captura detectada
+✓ boitata: captura pontua uma única vez
+✓ boitata: captura congela inimigos
+✓ boitata: captura inicial salva e desbloqueia
+✓ boitata: captura abre pergunta sem concluir
+✓ boitata: resposta errada duplica
+✓ boitata: erro reinicia captura sem cargas
+✓ boitata: resposta certa conclui após captura
+✓ iara: ataque tem animação 0
+✓ iara: exatamente uma vida por ataque 0
+✓ iara: dano não duplica vírus 0
+✓ iara: predador desaparece após dano 0
+✓ iara: proteção e timer reiniciados 0
+✓ iara: novo ciclo aguarda 0
+✓ iara: ataque tem animação 1
+✓ iara: exatamente uma vida por ataque 1
+✓ iara: dano não duplica vírus 1
+✓ iara: predador desaparece após dano 1
+✓ iara: proteção e timer reiniciados 1
+✓ iara: novo ciclo aguarda 1
+✓ iara: ataque tem animação 2
+✓ iara: exatamente uma vida por ataque 2
+✓ iara: dano não duplica vírus 2
+✓ iara: terceira vida termina a tentativa
+✓ iara: repetir preserva setor e total
+✓ iara: só pacotes não concluem
+✓ iara: captura detectada
+✓ iara: captura pontua uma única vez
+✓ iara: captura congela inimigos
+✓ iara: captura inicial salva e desbloqueia
+✓ iara: captura abre pergunta sem concluir
+✓ iara: resposta errada duplica
+✓ iara: erro reinicia captura sem cargas
+✓ iara: resposta certa conclui após captura
+✓ Captura final neutraliza núcleo e exige pergunta
+✓ boitata: perseguição real captura alvo móvel no setor 1
+✓ boitata: perseguição real captura alvo móvel no setor 6
+✓ boitata: perseguição real captura alvo móvel no setor 16
+✓ boitata: perseguição real captura alvo móvel no setor 26
+✓ boitata: perseguição real captura alvo móvel no setor 30
+✓ iara: perseguição real captura alvo móvel no setor 1
+✓ iara: perseguição real captura alvo móvel no setor 6
+✓ iara: perseguição real captura alvo móvel no setor 16
+✓ iara: perseguição real captura alvo móvel no setor 26
+✓ iara: perseguição real captura alvo móvel no setor 30
+✓ Fase 1: arena fixa e itens acessíveis
+✓ Fase 1: geração não expande
+✓ Fase 1: todas as células livres conectadas
+✓ Fase 1: borda 1,9
+✓ Fase 1: borda 22,9
+✓ Fase 1: borda 6,1
+✓ Fase 1: borda 6,16
+✓ Fase 1: vírus comuns internos
+✓ Fase 1: fuga contínua respeita o mapa
+✓ Fase 1: predador surge em posição segura
+✓ Fase 1: perseguição respeita limites
+✓ Fase 1: retorno seguro e câmera parada
+✓ Fase 2: arena fixa e itens acessíveis
+✓ Fase 2: geração não expande
+✓ Fase 2: todas as células livres conectadas
+✓ Fase 2: borda 1,9
+✓ Fase 2: borda 22,9
+✓ Fase 2: borda 6,1
+✓ Fase 2: borda 6,16
+✓ Fase 2: vírus comuns internos
+✓ Fase 2: fuga contínua respeita o mapa
+✓ Fase 2: predador surge em posição segura
+✓ Fase 2: perseguição respeita limites
+✓ Fase 2: retorno seguro e câmera parada
+✓ Fase 3: arena fixa e itens acessíveis
+✓ Fase 3: geração não expande
+✓ Fase 3: todas as células livres conectadas
+✓ Fase 3: borda 1,9
+✓ Fase 3: borda 22,9
+✓ Fase 3: borda 6,1
+✓ Fase 3: borda 6,16
+✓ Fase 3: vírus comuns internos
+✓ Fase 3: fuga contínua respeita o mapa
+✓ Fase 3: predador surge em posição segura
+✓ Fase 3: perseguição respeita limites
+✓ Fase 3: retorno seguro e câmera parada
+✓ Fase 4: arena fixa e itens acessíveis
+✓ Fase 4: geração não expande
+✓ Fase 4: todas as células livres conectadas
+✓ Fase 4: borda 1,9
+✓ Fase 4: borda 22,9
+✓ Fase 4: borda 6,1
+✓ Fase 4: borda 6,16
+✓ Fase 4: vírus comuns internos
+✓ Fase 4: fuga contínua respeita o mapa
+✓ Fase 4: predador surge em posição segura
+✓ Fase 4: perseguição respeita limites
+✓ Fase 4: retorno seguro e câmera parada
+✓ Fase 5: arena fixa e itens acessíveis
+✓ Fase 5: geração não expande
+✓ Fase 5: todas as células livres conectadas
+✓ Fase 5: borda 1,9
+✓ Fase 5: borda 22,9
+✓ Fase 5: borda 6,1
+✓ Fase 5: borda 6,16
+✓ Fase 5: vírus comuns internos
+✓ Fase 5: fuga contínua respeita o mapa
+✓ Fase 5: predador surge em posição segura
+✓ Fase 5: perseguição respeita limites
+✓ Fase 5: retorno seguro e câmera parada
+✓ Fase 6: arena fixa e itens acessíveis
+✓ Fase 6: geração não expande
+✓ Fase 6: todas as células livres conectadas
+✓ Fase 6: borda 1,9
+✓ Fase 6: borda 22,9
+✓ Fase 6: borda 6,1
+✓ Fase 6: borda 6,16
+✓ Fase 6: vírus comuns internos
+✓ Fase 6: fuga contínua respeita o mapa
+✓ Fase 6: predador surge em posição segura
+✓ Fase 6: perseguição respeita limites
+✓ Fase 6: retorno seguro e câmera parada
+✓ Fase 7: arena fixa e itens acessíveis
+✓ Fase 7: geração não expande
+✓ Fase 7: todas as células livres conectadas
+✓ Fase 7: borda 1,9
+✓ Fase 7: borda 22,9
+✓ Fase 7: borda 6,1
+✓ Fase 7: borda 6,16
+✓ Fase 7: vírus comuns internos
+✓ Fase 7: fuga contínua respeita o mapa
+✓ Fase 7: predador surge em posição segura
+✓ Fase 7: perseguição respeita limites
+✓ Fase 7: retorno seguro e câmera parada
+✓ Fase 8: arena fixa e itens acessíveis
+✓ Fase 8: geração não expande
+✓ Fase 8: todas as células livres conectadas
+✓ Fase 8: borda 1,9
+✓ Fase 8: borda 22,9
+✓ Fase 8: borda 6,1
+✓ Fase 8: borda 6,16
+✓ Fase 8: vírus comuns internos
+✓ Fase 8: fuga contínua respeita o mapa
+✓ Fase 8: predador surge em posição segura
+✓ Fase 8: perseguição respeita limites
+✓ Fase 8: retorno seguro e câmera parada
+✓ Fase 9: arena fixa e itens acessíveis
+✓ Fase 9: geração não expande
+✓ Fase 9: todas as células livres conectadas
+✓ Fase 9: borda 1,9
+✓ Fase 9: borda 22,9
+✓ Fase 9: borda 6,1
+✓ Fase 9: borda 6,16
+✓ Fase 9: vírus comuns internos
+✓ Fase 9: fuga contínua respeita o mapa
+✓ Fase 9: predador surge em posição segura
+✓ Fase 9: perseguição respeita limites
+✓ Fase 9: retorno seguro e câmera parada
+✓ Fase 10: arena fixa e itens acessíveis
+✓ Fase 10: geração não expande
+✓ Fase 10: todas as células livres conectadas
+✓ Fase 10: borda 1,9
+✓ Fase 10: borda 22,9
+✓ Fase 10: borda 6,1
+✓ Fase 10: borda 6,16
+✓ Fase 10: vírus comuns internos
+✓ Fase 10: fuga contínua respeita o mapa
+✓ Fase 10: predador surge em posição segura
+✓ Fase 10: perseguição respeita limites
+✓ Fase 10: retorno seguro e câmera parada
+✓ Fase 11: arena fixa e itens acessíveis
+✓ Fase 11: geração não expande
+✓ Fase 11: todas as células livres conectadas
+✓ Fase 11: borda 1,9
+✓ Fase 11: borda 22,9
+✓ Fase 11: borda 6,1
+✓ Fase 11: borda 6,16
+✓ Fase 11: vírus comuns internos
+✓ Fase 11: fuga contínua respeita o mapa
+✓ Fase 11: predador surge em posição segura
+✓ Fase 11: perseguição respeita limites
+✓ Fase 11: retorno seguro e câmera parada
+✓ Fase 12: arena fixa e itens acessíveis
+✓ Fase 12: geração não expande
+✓ Fase 12: todas as células livres conectadas
+✓ Fase 12: borda 1,9
+✓ Fase 12: borda 22,9
+✓ Fase 12: borda 6,1
+✓ Fase 12: borda 6,16
+✓ Fase 12: vírus comuns internos
+✓ Fase 12: fuga contínua respeita o mapa
+✓ Fase 12: predador surge em posição segura
+✓ Fase 12: perseguição respeita limites
+✓ Fase 12: retorno seguro e câmera parada
+✓ Fase 13: arena fixa e itens acessíveis
+✓ Fase 13: geração não expande
+✓ Fase 13: todas as células livres conectadas
+✓ Fase 13: borda 1,9
+✓ Fase 13: borda 22,9
+✓ Fase 13: borda 6,1
+✓ Fase 13: borda 6,16
+✓ Fase 13: vírus comuns internos
+✓ Fase 13: fuga contínua respeita o mapa
+✓ Fase 13: predador surge em posição segura
+✓ Fase 13: perseguição respeita limites
+✓ Fase 13: retorno seguro e câmera parada
+✓ Fase 14: arena fixa e itens acessíveis
+✓ Fase 14: geração não expande
+✓ Fase 14: todas as células livres conectadas
+✓ Fase 14: borda 1,9
+✓ Fase 14: borda 22,9
+✓ Fase 14: borda 6,1
+✓ Fase 14: borda 6,16
+✓ Fase 14: vírus comuns internos
+✓ Fase 14: fuga contínua respeita o mapa
+✓ Fase 14: predador surge em posição segura
+✓ Fase 14: perseguição respeita limites
+✓ Fase 14: retorno seguro e câmera parada
+✓ Fase 15: arena fixa e itens acessíveis
+✓ Fase 15: geração não expande
+✓ Fase 15: todas as células livres conectadas
+✓ Fase 15: borda 1,9
+✓ Fase 15: borda 22,9
+✓ Fase 15: borda 6,1
+✓ Fase 15: borda 6,16
+✓ Fase 15: vírus comuns internos
+✓ Fase 15: fuga contínua respeita o mapa
+✓ Fase 15: predador surge em posição segura
+✓ Fase 15: perseguição respeita limites
+✓ Fase 15: retorno seguro e câmera parada
+✓ Fase 16: arena fixa e itens acessíveis
+✓ Fase 16: geração não expande
+✓ Fase 16: todas as células livres conectadas
+✓ Fase 16: borda 1,9
+✓ Fase 16: borda 22,9
+✓ Fase 16: borda 6,1
+✓ Fase 16: borda 6,16
+✓ Fase 16: vírus comuns internos
+✓ Fase 16: fuga contínua respeita o mapa
+✓ Fase 16: predador surge em posição segura
+✓ Fase 16: perseguição respeita limites
+✓ Fase 16: retorno seguro e câmera parada
+✓ Fase 17: arena fixa e itens acessíveis
+✓ Fase 17: geração não expande
+✓ Fase 17: todas as células livres conectadas
+✓ Fase 17: borda 1,9
+✓ Fase 17: borda 22,9
+✓ Fase 17: borda 6,1
+✓ Fase 17: borda 6,16
+✓ Fase 17: vírus comuns internos
+✓ Fase 17: fuga contínua respeita o mapa
+✓ Fase 17: predador surge em posição segura
+✓ Fase 17: perseguição respeita limites
+✓ Fase 17: retorno seguro e câmera parada
+✓ Fase 18: arena fixa e itens acessíveis
+✓ Fase 18: geração não expande
+✓ Fase 18: todas as células livres conectadas
+✓ Fase 18: borda 1,9
+✓ Fase 18: borda 22,9
+✓ Fase 18: borda 6,1
+✓ Fase 18: borda 6,16
+✓ Fase 18: vírus comuns internos
+✓ Fase 18: fuga contínua respeita o mapa
+✓ Fase 18: predador surge em posição segura
+✓ Fase 18: perseguição respeita limites
+✓ Fase 18: retorno seguro e câmera parada
+✓ Fase 19: arena fixa e itens acessíveis
+✓ Fase 19: geração não expande
+✓ Fase 19: todas as células livres conectadas
+✓ Fase 19: borda 1,9
+✓ Fase 19: borda 22,9
+✓ Fase 19: borda 6,1
+✓ Fase 19: borda 6,16
+✓ Fase 19: vírus comuns internos
+✓ Fase 19: fuga contínua respeita o mapa
+✓ Fase 19: predador surge em posição segura
+✓ Fase 19: perseguição respeita limites
+✓ Fase 19: retorno seguro e câmera parada
+✓ Fase 20: arena fixa e itens acessíveis
+✓ Fase 20: geração não expande
+✓ Fase 20: todas as células livres conectadas
+✓ Fase 20: borda 1,9
+✓ Fase 20: borda 22,9
+✓ Fase 20: borda 6,1
+✓ Fase 20: borda 6,16
+✓ Fase 20: vírus comuns internos
+✓ Fase 20: fuga contínua respeita o mapa
+✓ Fase 20: predador surge em posição segura
+✓ Fase 20: perseguição respeita limites
+✓ Fase 20: retorno seguro e câmera parada
+✓ Fase 21: arena fixa e itens acessíveis
+✓ Fase 21: geração não expande
+✓ Fase 21: todas as células livres conectadas
+✓ Fase 21: borda 1,9
+✓ Fase 21: borda 22,9
+✓ Fase 21: borda 6,1
+✓ Fase 21: borda 6,16
+✓ Fase 21: vírus comuns internos
+✓ Fase 21: fuga contínua respeita o mapa
+✓ Fase 21: predador surge em posição segura
+✓ Fase 21: perseguição respeita limites
+✓ Fase 21: retorno seguro e câmera parada
+✓ Fase 22: arena fixa e itens acessíveis
+✓ Fase 22: geração não expande
+✓ Fase 22: todas as células livres conectadas
+✓ Fase 22: borda 1,9
+✓ Fase 22: borda 22,9
+✓ Fase 22: borda 6,1
+✓ Fase 22: borda 6,16
+✓ Fase 22: vírus comuns internos
+✓ Fase 22: fuga contínua respeita o mapa
+✓ Fase 22: predador surge em posição segura
+✓ Fase 22: perseguição respeita limites
+✓ Fase 22: retorno seguro e câmera parada
+✓ Fase 23: arena fixa e itens acessíveis
+✓ Fase 23: geração não expande
+✓ Fase 23: todas as células livres conectadas
+✓ Fase 23: borda 1,9
+✓ Fase 23: borda 22,9
+✓ Fase 23: borda 6,1
+✓ Fase 23: borda 6,16
+✓ Fase 23: vírus comuns internos
+✓ Fase 23: fuga contínua respeita o mapa
+✓ Fase 23: predador surge em posição segura
+✓ Fase 23: perseguição respeita limites
+✓ Fase 23: retorno seguro e câmera parada
+✓ Fase 24: arena fixa e itens acessíveis
+✓ Fase 24: geração não expande
+✓ Fase 24: todas as células livres conectadas
+✓ Fase 24: borda 1,9
+✓ Fase 24: borda 22,9
+✓ Fase 24: borda 6,1
+✓ Fase 24: borda 6,16
+✓ Fase 24: vírus comuns internos
+✓ Fase 24: fuga contínua respeita o mapa
+✓ Fase 24: predador surge em posição segura
+✓ Fase 24: perseguição respeita limites
+✓ Fase 24: retorno seguro e câmera parada
+✓ Fase 25: arena fixa e itens acessíveis
+✓ Fase 25: geração não expande
+✓ Fase 25: todas as células livres conectadas
+✓ Fase 25: borda 1,9
+✓ Fase 25: borda 22,9
+✓ Fase 25: borda 6,1
+✓ Fase 25: borda 6,16
+✓ Fase 25: vírus comuns internos
+✓ Fase 25: fuga contínua respeita o mapa
+✓ Fase 25: predador surge em posição segura
+✓ Fase 25: perseguição respeita limites
+✓ Fase 25: retorno seguro e câmera parada
+✓ Fase 26: arena fixa e itens acessíveis
+✓ Fase 26: geração não expande
+✓ Fase 26: todas as células livres conectadas
+✓ Fase 26: borda 1,9
+✓ Fase 26: borda 22,9
+✓ Fase 26: borda 6,1
+✓ Fase 26: borda 6,16
+✓ Fase 26: vírus comuns internos
+✓ Fase 26: fuga contínua respeita o mapa
+✓ Fase 26: predador surge em posição segura
+✓ Fase 26: perseguição respeita limites
+✓ Fase 26: retorno seguro e câmera parada
+✓ Fase 27: arena fixa e itens acessíveis
+✓ Fase 27: geração não expande
+✓ Fase 27: todas as células livres conectadas
+✓ Fase 27: borda 1,9
+✓ Fase 27: borda 22,9
+✓ Fase 27: borda 6,1
+✓ Fase 27: borda 6,16
+✓ Fase 27: vírus comuns internos
+✓ Fase 27: fuga contínua respeita o mapa
+✓ Fase 27: predador surge em posição segura
+✓ Fase 27: perseguição respeita limites
+✓ Fase 27: retorno seguro e câmera parada
+✓ Fase 28: arena fixa e itens acessíveis
+✓ Fase 28: geração não expande
+✓ Fase 28: todas as células livres conectadas
+✓ Fase 28: borda 1,9
+✓ Fase 28: borda 22,9
+✓ Fase 28: borda 6,1
+✓ Fase 28: borda 6,16
+✓ Fase 28: vírus comuns internos
+✓ Fase 28: fuga contínua respeita o mapa
+✓ Fase 28: predador surge em posição segura
+✓ Fase 28: perseguição respeita limites
+✓ Fase 28: retorno seguro e câmera parada
+✓ Fase 29: arena fixa e itens acessíveis
+✓ Fase 29: geração não expande
+✓ Fase 29: todas as células livres conectadas
+✓ Fase 29: borda 1,9
+✓ Fase 29: borda 22,9
+✓ Fase 29: borda 6,1
+✓ Fase 29: borda 6,16
+✓ Fase 29: vírus comuns internos
+✓ Fase 29: fuga contínua respeita o mapa
+✓ Fase 29: predador surge em posição segura
+✓ Fase 29: perseguição respeita limites
+✓ Fase 29: retorno seguro e câmera parada
+✓ Fase 30: arena fixa e itens acessíveis
+✓ Fase 30: geração não expande
+✓ Fase 30: todas as células livres conectadas
+✓ Fase 30: borda 1,9
+✓ Fase 30: borda 22,9
+✓ Fase 30: borda 6,1
+✓ Fase 30: borda 6,16
+✓ Fase 30: vírus comuns internos
+✓ Fase 30: fuga contínua respeita o mapa
+✓ Fase 30: predador surge em posição segura
+✓ Fase 30: perseguição respeita limites
+✓ Fase 30: retorno seguro e câmera parada
+✓ 30 distribuições distintas
+✓ WebGL: câmera ortográfica horizontal em 3D
+✓ 1366 × 768: zoom de 50% no centro, proporção responsiva
+✓ 1280 × 720: zoom de 50% no centro, proporção responsiva
+✓ 1920 × 1080: zoom de 50% no centro, proporção responsiva
+✓ 2560 × 1440: zoom de 50% no centro, proporção responsiva
+✓ 3840 × 2160: zoom de 50% no centro, proporção responsiva
+✓ 900 × 1200: zoom de 50% no centro, proporção responsiva
+✓ 2400 × 900: zoom de 50% no centro, proporção responsiva
+✓ WebGL: câmera imóvel e três trechos finitos
+✓ boitata setor 1: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 1: captura por head em trilha longa
+✓ boitata setor 1: captura única
+✓ boitata setor 1: vitória e progressão por head
+✓ boitata setor 1: captura por body em trilha longa
+✓ boitata setor 1: captura única
+✓ boitata setor 1: vitória e progressão por body
+✓ boitata setor 1: captura por tip em trilha longa
+✓ boitata setor 1: captura única
+✓ boitata setor 1: vitória e progressão por tip
+✓ boitata setor 2: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 2: captura por head em trilha longa
+✓ boitata setor 2: captura única
+✓ boitata setor 2: vitória e progressão por head
+✓ boitata setor 2: captura por body em trilha longa
+✓ boitata setor 2: captura única
+✓ boitata setor 2: vitória e progressão por body
+✓ boitata setor 2: captura por tip em trilha longa
+✓ boitata setor 2: captura única
+✓ boitata setor 2: vitória e progressão por tip
+✓ boitata setor 3: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 3: captura por head em trilha longa
+✓ boitata setor 3: captura única
+✓ boitata setor 3: vitória e progressão por head
+✓ boitata setor 3: captura por body em trilha longa
+✓ boitata setor 3: captura única
+✓ boitata setor 3: vitória e progressão por body
+✓ boitata setor 3: captura por tip em trilha longa
+✓ boitata setor 3: captura única
+✓ boitata setor 3: vitória e progressão por tip
+✓ boitata setor 4: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 4: captura por head em trilha longa
+✓ boitata setor 4: captura única
+✓ boitata setor 4: vitória e progressão por head
+✓ boitata setor 4: captura por body em trilha longa
+✓ boitata setor 4: captura única
+✓ boitata setor 4: vitória e progressão por body
+✓ boitata setor 4: captura por tip em trilha longa
+✓ boitata setor 4: captura única
+✓ boitata setor 4: vitória e progressão por tip
+✓ boitata setor 5: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 5: captura por head em trilha longa
+✓ boitata setor 5: captura única
+✓ boitata setor 5: vitória e progressão por head
+✓ boitata setor 5: captura por body em trilha longa
+✓ boitata setor 5: captura única
+✓ boitata setor 5: vitória e progressão por body
+✓ boitata setor 5: captura por tip em trilha longa
+✓ boitata setor 5: captura única
+✓ boitata setor 5: vitória e progressão por tip
+✓ boitata setor 6: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 6: captura por head em trilha longa
+✓ boitata setor 6: captura única
+✓ boitata setor 6: pergunta após captura
+✓ boitata setor 6: vitória e progressão por head
+✓ boitata setor 6: captura por body em trilha longa
+✓ boitata setor 6: captura única
+✓ boitata setor 6: pergunta após captura
+✓ boitata setor 6: vitória e progressão por body
+✓ boitata setor 6: captura por tip em trilha longa
+✓ boitata setor 6: captura única
+✓ boitata setor 6: pergunta após captura
+✓ boitata setor 6: vitória e progressão por tip
+✓ boitata setor 7: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 7: captura por head em trilha longa
+✓ boitata setor 7: captura única
+✓ boitata setor 7: pergunta após captura
+✓ boitata setor 7: vitória e progressão por head
+✓ boitata setor 7: captura por body em trilha longa
+✓ boitata setor 7: captura única
+✓ boitata setor 7: pergunta após captura
+✓ boitata setor 7: vitória e progressão por body
+✓ boitata setor 7: captura por tip em trilha longa
+✓ boitata setor 7: captura única
+✓ boitata setor 7: pergunta após captura
+✓ boitata setor 7: vitória e progressão por tip
+✓ boitata setor 8: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 8: captura por head em trilha longa
+✓ boitata setor 8: captura única
+✓ boitata setor 8: pergunta após captura
+✓ boitata setor 8: vitória e progressão por head
+✓ boitata setor 8: captura por body em trilha longa
+✓ boitata setor 8: captura única
+✓ boitata setor 8: pergunta após captura
+✓ boitata setor 8: vitória e progressão por body
+✓ boitata setor 8: captura por tip em trilha longa
+✓ boitata setor 8: captura única
+✓ boitata setor 8: pergunta após captura
+✓ boitata setor 8: vitória e progressão por tip
+✓ boitata setor 9: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 9: captura por head em trilha longa
+✓ boitata setor 9: captura única
+✓ boitata setor 9: pergunta após captura
+✓ boitata setor 9: vitória e progressão por head
+✓ boitata setor 9: captura por body em trilha longa
+✓ boitata setor 9: captura única
+✓ boitata setor 9: pergunta após captura
+✓ boitata setor 9: vitória e progressão por body
+✓ boitata setor 9: captura por tip em trilha longa
+✓ boitata setor 9: captura única
+✓ boitata setor 9: pergunta após captura
+✓ boitata setor 9: vitória e progressão por tip
+✓ boitata setor 10: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 10: captura por head em trilha longa
+✓ boitata setor 10: captura única
+✓ boitata setor 10: pergunta após captura
+✓ boitata setor 10: vitória e progressão por head
+✓ boitata setor 10: captura por body em trilha longa
+✓ boitata setor 10: captura única
+✓ boitata setor 10: pergunta após captura
+✓ boitata setor 10: vitória e progressão por body
+✓ boitata setor 10: captura por tip em trilha longa
+✓ boitata setor 10: captura única
+✓ boitata setor 10: pergunta após captura
+✓ boitata setor 10: vitória e progressão por tip
+✓ boitata setor 11: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 11: captura por head em trilha longa
+✓ boitata setor 11: captura única
+✓ boitata setor 11: pergunta após captura
+✓ boitata setor 11: vitória e progressão por head
+✓ boitata setor 11: captura por body em trilha longa
+✓ boitata setor 11: captura única
+✓ boitata setor 11: pergunta após captura
+✓ boitata setor 11: vitória e progressão por body
+✓ boitata setor 11: captura por tip em trilha longa
+✓ boitata setor 11: captura única
+✓ boitata setor 11: pergunta após captura
+✓ boitata setor 11: vitória e progressão por tip
+✓ boitata setor 12: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 12: captura por head em trilha longa
+✓ boitata setor 12: captura única
+✓ boitata setor 12: pergunta após captura
+✓ boitata setor 12: vitória e progressão por head
+✓ boitata setor 12: captura por body em trilha longa
+✓ boitata setor 12: captura única
+✓ boitata setor 12: pergunta após captura
+✓ boitata setor 12: vitória e progressão por body
+✓ boitata setor 12: captura por tip em trilha longa
+✓ boitata setor 12: captura única
+✓ boitata setor 12: pergunta após captura
+✓ boitata setor 12: vitória e progressão por tip
+✓ boitata setor 13: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 13: captura por head em trilha longa
+✓ boitata setor 13: captura única
+✓ boitata setor 13: pergunta após captura
+✓ boitata setor 13: vitória e progressão por head
+✓ boitata setor 13: captura por body em trilha longa
+✓ boitata setor 13: captura única
+✓ boitata setor 13: pergunta após captura
+✓ boitata setor 13: vitória e progressão por body
+✓ boitata setor 13: captura por tip em trilha longa
+✓ boitata setor 13: captura única
+✓ boitata setor 13: pergunta após captura
+✓ boitata setor 13: vitória e progressão por tip
+✓ boitata setor 14: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 14: captura por head em trilha longa
+✓ boitata setor 14: captura única
+✓ boitata setor 14: pergunta após captura
+✓ boitata setor 14: vitória e progressão por head
+✓ boitata setor 14: captura por body em trilha longa
+✓ boitata setor 14: captura única
+✓ boitata setor 14: pergunta após captura
+✓ boitata setor 14: vitória e progressão por body
+✓ boitata setor 14: captura por tip em trilha longa
+✓ boitata setor 14: captura única
+✓ boitata setor 14: pergunta após captura
+✓ boitata setor 14: vitória e progressão por tip
+✓ boitata setor 15: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 15: captura por head em trilha longa
+✓ boitata setor 15: captura única
+✓ boitata setor 15: pergunta após captura
+✓ boitata setor 15: vitória e progressão por head
+✓ boitata setor 15: captura por body em trilha longa
+✓ boitata setor 15: captura única
+✓ boitata setor 15: pergunta após captura
+✓ boitata setor 15: vitória e progressão por body
+✓ boitata setor 15: captura por tip em trilha longa
+✓ boitata setor 15: captura única
+✓ boitata setor 15: pergunta após captura
+✓ boitata setor 15: vitória e progressão por tip
+✓ boitata setor 16: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 16: captura por head em trilha longa
+✓ boitata setor 16: captura única
+✓ boitata setor 16: pergunta após captura
+✓ boitata setor 16: vitória e progressão por head
+✓ boitata setor 16: captura por body em trilha longa
+✓ boitata setor 16: captura única
+✓ boitata setor 16: pergunta após captura
+✓ boitata setor 16: vitória e progressão por body
+✓ boitata setor 16: captura por tip em trilha longa
+✓ boitata setor 16: captura única
+✓ boitata setor 16: pergunta após captura
+✓ boitata setor 16: vitória e progressão por tip
+✓ boitata setor 17: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 17: captura por head em trilha longa
+✓ boitata setor 17: captura única
+✓ boitata setor 17: pergunta após captura
+✓ boitata setor 17: vitória e progressão por head
+✓ boitata setor 17: captura por body em trilha longa
+✓ boitata setor 17: captura única
+✓ boitata setor 17: pergunta após captura
+✓ boitata setor 17: vitória e progressão por body
+✓ boitata setor 17: captura por tip em trilha longa
+✓ boitata setor 17: captura única
+✓ boitata setor 17: pergunta após captura
+✓ boitata setor 17: vitória e progressão por tip
+✓ boitata setor 18: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 18: captura por head em trilha longa
+✓ boitata setor 18: captura única
+✓ boitata setor 18: pergunta após captura
+✓ boitata setor 18: vitória e progressão por head
+✓ boitata setor 18: captura por body em trilha longa
+✓ boitata setor 18: captura única
+✓ boitata setor 18: pergunta após captura
+✓ boitata setor 18: vitória e progressão por body
+✓ boitata setor 18: captura por tip em trilha longa
+✓ boitata setor 18: captura única
+✓ boitata setor 18: pergunta após captura
+✓ boitata setor 18: vitória e progressão por tip
+✓ boitata setor 19: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 19: captura por head em trilha longa
+✓ boitata setor 19: captura única
+✓ boitata setor 19: pergunta após captura
+✓ boitata setor 19: vitória e progressão por head
+✓ boitata setor 19: captura por body em trilha longa
+✓ boitata setor 19: captura única
+✓ boitata setor 19: pergunta após captura
+✓ boitata setor 19: vitória e progressão por body
+✓ boitata setor 19: captura por tip em trilha longa
+✓ boitata setor 19: captura única
+✓ boitata setor 19: pergunta após captura
+✓ boitata setor 19: vitória e progressão por tip
+✓ boitata setor 20: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 20: captura por head em trilha longa
+✓ boitata setor 20: captura única
+✓ boitata setor 20: pergunta após captura
+✓ boitata setor 20: vitória e progressão por head
+✓ boitata setor 20: captura por body em trilha longa
+✓ boitata setor 20: captura única
+✓ boitata setor 20: pergunta após captura
+✓ boitata setor 20: vitória e progressão por body
+✓ boitata setor 20: captura por tip em trilha longa
+✓ boitata setor 20: captura única
+✓ boitata setor 20: pergunta após captura
+✓ boitata setor 20: vitória e progressão por tip
+✓ boitata setor 21: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 21: captura por head em trilha longa
+✓ boitata setor 21: captura única
+✓ boitata setor 21: pergunta após captura
+✓ boitata setor 21: vitória e progressão por head
+✓ boitata setor 21: captura por body em trilha longa
+✓ boitata setor 21: captura única
+✓ boitata setor 21: pergunta após captura
+✓ boitata setor 21: vitória e progressão por body
+✓ boitata setor 21: captura por tip em trilha longa
+✓ boitata setor 21: captura única
+✓ boitata setor 21: pergunta após captura
+✓ boitata setor 21: vitória e progressão por tip
+✓ boitata setor 22: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 22: captura por head em trilha longa
+✓ boitata setor 22: captura única
+✓ boitata setor 22: pergunta após captura
+✓ boitata setor 22: vitória e progressão por head
+✓ boitata setor 22: captura por body em trilha longa
+✓ boitata setor 22: captura única
+✓ boitata setor 22: pergunta após captura
+✓ boitata setor 22: vitória e progressão por body
+✓ boitata setor 22: captura por tip em trilha longa
+✓ boitata setor 22: captura única
+✓ boitata setor 22: pergunta após captura
+✓ boitata setor 22: vitória e progressão por tip
+✓ boitata setor 23: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 23: captura por head em trilha longa
+✓ boitata setor 23: captura única
+✓ boitata setor 23: pergunta após captura
+✓ boitata setor 23: vitória e progressão por head
+✓ boitata setor 23: captura por body em trilha longa
+✓ boitata setor 23: captura única
+✓ boitata setor 23: pergunta após captura
+✓ boitata setor 23: vitória e progressão por body
+✓ boitata setor 23: captura por tip em trilha longa
+✓ boitata setor 23: captura única
+✓ boitata setor 23: pergunta após captura
+✓ boitata setor 23: vitória e progressão por tip
+✓ boitata setor 24: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 24: captura por head em trilha longa
+✓ boitata setor 24: captura única
+✓ boitata setor 24: pergunta após captura
+✓ boitata setor 24: vitória e progressão por head
+✓ boitata setor 24: captura por body em trilha longa
+✓ boitata setor 24: captura única
+✓ boitata setor 24: pergunta após captura
+✓ boitata setor 24: vitória e progressão por body
+✓ boitata setor 24: captura por tip em trilha longa
+✓ boitata setor 24: captura única
+✓ boitata setor 24: pergunta após captura
+✓ boitata setor 24: vitória e progressão por tip
+✓ boitata setor 25: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 25: captura por head em trilha longa
+✓ boitata setor 25: captura única
+✓ boitata setor 25: pergunta após captura
+✓ boitata setor 25: vitória e progressão por head
+✓ boitata setor 25: captura por body em trilha longa
+✓ boitata setor 25: captura única
+✓ boitata setor 25: pergunta após captura
+✓ boitata setor 25: vitória e progressão por body
+✓ boitata setor 25: captura por tip em trilha longa
+✓ boitata setor 25: captura única
+✓ boitata setor 25: pergunta após captura
+✓ boitata setor 25: vitória e progressão por tip
+✓ boitata setor 26: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 26: captura por head em trilha longa
+✓ boitata setor 26: captura única
+✓ boitata setor 26: pergunta após captura
+✓ boitata setor 26: vitória e progressão por head
+✓ boitata setor 26: captura por body em trilha longa
+✓ boitata setor 26: captura única
+✓ boitata setor 26: pergunta após captura
+✓ boitata setor 26: vitória e progressão por body
+✓ boitata setor 26: captura por tip em trilha longa
+✓ boitata setor 26: captura única
+✓ boitata setor 26: pergunta após captura
+✓ boitata setor 26: vitória e progressão por tip
+✓ boitata setor 27: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 27: captura por head em trilha longa
+✓ boitata setor 27: captura única
+✓ boitata setor 27: pergunta após captura
+✓ boitata setor 27: vitória e progressão por head
+✓ boitata setor 27: captura por body em trilha longa
+✓ boitata setor 27: captura única
+✓ boitata setor 27: pergunta após captura
+✓ boitata setor 27: vitória e progressão por body
+✓ boitata setor 27: captura por tip em trilha longa
+✓ boitata setor 27: captura única
+✓ boitata setor 27: pergunta após captura
+✓ boitata setor 27: vitória e progressão por tip
+✓ boitata setor 28: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 28: captura por head em trilha longa
+✓ boitata setor 28: captura única
+✓ boitata setor 28: pergunta após captura
+✓ boitata setor 28: vitória e progressão por head
+✓ boitata setor 28: captura por body em trilha longa
+✓ boitata setor 28: captura única
+✓ boitata setor 28: pergunta após captura
+✓ boitata setor 28: vitória e progressão por body
+✓ boitata setor 28: captura por tip em trilha longa
+✓ boitata setor 28: captura única
+✓ boitata setor 28: pergunta após captura
+✓ boitata setor 28: vitória e progressão por tip
+✓ boitata setor 29: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 29: captura por head em trilha longa
+✓ boitata setor 29: captura única
+✓ boitata setor 29: pergunta após captura
+✓ boitata setor 29: vitória e progressão por head
+✓ boitata setor 29: captura por body em trilha longa
+✓ boitata setor 29: captura única
+✓ boitata setor 29: pergunta após captura
+✓ boitata setor 29: vitória e progressão por body
+✓ boitata setor 29: captura por tip em trilha longa
+✓ boitata setor 29: captura única
+✓ boitata setor 29: pergunta após captura
+✓ boitata setor 29: vitória e progressão por tip
+✓ boitata setor 30: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ boitata setor 30: captura por head em trilha longa
+✓ boitata setor 30: captura única
+✓ boitata setor 30: pergunta após captura
+✓ boitata setor 30: vitória e progressão por head
+✓ boitata setor 30: captura por body em trilha longa
+✓ boitata setor 30: captura única
+✓ boitata setor 30: pergunta após captura
+✓ boitata setor 30: vitória e progressão por body
+✓ boitata setor 30: captura por tip em trilha longa
+✓ boitata setor 30: captura única
+✓ boitata setor 30: pergunta após captura
+✓ boitata setor 30: vitória e progressão por tip
+✓ iara setor 1: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 1: captura por head em trilha longa
+✓ iara setor 1: captura única
+✓ iara setor 1: vitória e progressão por head
+✓ iara setor 1: captura por body em trilha longa
+✓ iara setor 1: captura única
+✓ iara setor 1: vitória e progressão por body
+✓ iara setor 1: captura por tip em trilha longa
+✓ iara setor 1: captura única
+✓ iara setor 1: vitória e progressão por tip
+✓ iara setor 2: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 2: captura por head em trilha longa
+✓ iara setor 2: captura única
+✓ iara setor 2: vitória e progressão por head
+✓ iara setor 2: captura por body em trilha longa
+✓ iara setor 2: captura única
+✓ iara setor 2: vitória e progressão por body
+✓ iara setor 2: captura por tip em trilha longa
+✓ iara setor 2: captura única
+✓ iara setor 2: vitória e progressão por tip
+✓ iara setor 3: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 3: captura por head em trilha longa
+✓ iara setor 3: captura única
+✓ iara setor 3: vitória e progressão por head
+✓ iara setor 3: captura por body em trilha longa
+✓ iara setor 3: captura única
+✓ iara setor 3: vitória e progressão por body
+✓ iara setor 3: captura por tip em trilha longa
+✓ iara setor 3: captura única
+✓ iara setor 3: vitória e progressão por tip
+✓ iara setor 4: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 4: captura por head em trilha longa
+✓ iara setor 4: captura única
+✓ iara setor 4: vitória e progressão por head
+✓ iara setor 4: captura por body em trilha longa
+✓ iara setor 4: captura única
+✓ iara setor 4: vitória e progressão por body
+✓ iara setor 4: captura por tip em trilha longa
+✓ iara setor 4: captura única
+✓ iara setor 4: vitória e progressão por tip
+✓ iara setor 5: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 5: captura por head em trilha longa
+✓ iara setor 5: captura única
+✓ iara setor 5: vitória e progressão por head
+✓ iara setor 5: captura por body em trilha longa
+✓ iara setor 5: captura única
+✓ iara setor 5: vitória e progressão por body
+✓ iara setor 5: captura por tip em trilha longa
+✓ iara setor 5: captura única
+✓ iara setor 5: vitória e progressão por tip
+✓ iara setor 6: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 6: captura por head em trilha longa
+✓ iara setor 6: captura única
+✓ iara setor 6: pergunta após captura
+✓ iara setor 6: vitória e progressão por head
+✓ iara setor 6: captura por body em trilha longa
+✓ iara setor 6: captura única
+✓ iara setor 6: pergunta após captura
+✓ iara setor 6: vitória e progressão por body
+✓ iara setor 6: captura por tip em trilha longa
+✓ iara setor 6: captura única
+✓ iara setor 6: pergunta após captura
+✓ iara setor 6: vitória e progressão por tip
+✓ iara setor 7: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 7: captura por head em trilha longa
+✓ iara setor 7: captura única
+✓ iara setor 7: pergunta após captura
+✓ iara setor 7: vitória e progressão por head
+✓ iara setor 7: captura por body em trilha longa
+✓ iara setor 7: captura única
+✓ iara setor 7: pergunta após captura
+✓ iara setor 7: vitória e progressão por body
+✓ iara setor 7: captura por tip em trilha longa
+✓ iara setor 7: captura única
+✓ iara setor 7: pergunta após captura
+✓ iara setor 7: vitória e progressão por tip
+✓ iara setor 8: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 8: captura por head em trilha longa
+✓ iara setor 8: captura única
+✓ iara setor 8: pergunta após captura
+✓ iara setor 8: vitória e progressão por head
+✓ iara setor 8: captura por body em trilha longa
+✓ iara setor 8: captura única
+✓ iara setor 8: pergunta após captura
+✓ iara setor 8: vitória e progressão por body
+✓ iara setor 8: captura por tip em trilha longa
+✓ iara setor 8: captura única
+✓ iara setor 8: pergunta após captura
+✓ iara setor 8: vitória e progressão por tip
+✓ iara setor 9: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 9: captura por head em trilha longa
+✓ iara setor 9: captura única
+✓ iara setor 9: pergunta após captura
+✓ iara setor 9: vitória e progressão por head
+✓ iara setor 9: captura por body em trilha longa
+✓ iara setor 9: captura única
+✓ iara setor 9: pergunta após captura
+✓ iara setor 9: vitória e progressão por body
+✓ iara setor 9: captura por tip em trilha longa
+✓ iara setor 9: captura única
+✓ iara setor 9: pergunta após captura
+✓ iara setor 9: vitória e progressão por tip
+✓ iara setor 10: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 10: captura por head em trilha longa
+✓ iara setor 10: captura única
+✓ iara setor 10: pergunta após captura
+✓ iara setor 10: vitória e progressão por head
+✓ iara setor 10: captura por body em trilha longa
+✓ iara setor 10: captura única
+✓ iara setor 10: pergunta após captura
+✓ iara setor 10: vitória e progressão por body
+✓ iara setor 10: captura por tip em trilha longa
+✓ iara setor 10: captura única
+✓ iara setor 10: pergunta após captura
+✓ iara setor 10: vitória e progressão por tip
+✓ iara setor 11: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 11: captura por head em trilha longa
+✓ iara setor 11: captura única
+✓ iara setor 11: pergunta após captura
+✓ iara setor 11: vitória e progressão por head
+✓ iara setor 11: captura por body em trilha longa
+✓ iara setor 11: captura única
+✓ iara setor 11: pergunta após captura
+✓ iara setor 11: vitória e progressão por body
+✓ iara setor 11: captura por tip em trilha longa
+✓ iara setor 11: captura única
+✓ iara setor 11: pergunta após captura
+✓ iara setor 11: vitória e progressão por tip
+✓ iara setor 12: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 12: captura por head em trilha longa
+✓ iara setor 12: captura única
+✓ iara setor 12: pergunta após captura
+✓ iara setor 12: vitória e progressão por head
+✓ iara setor 12: captura por body em trilha longa
+✓ iara setor 12: captura única
+✓ iara setor 12: pergunta após captura
+✓ iara setor 12: vitória e progressão por body
+✓ iara setor 12: captura por tip em trilha longa
+✓ iara setor 12: captura única
+✓ iara setor 12: pergunta após captura
+✓ iara setor 12: vitória e progressão por tip
+✓ iara setor 13: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 13: captura por head em trilha longa
+✓ iara setor 13: captura única
+✓ iara setor 13: pergunta após captura
+✓ iara setor 13: vitória e progressão por head
+✓ iara setor 13: captura por body em trilha longa
+✓ iara setor 13: captura única
+✓ iara setor 13: pergunta após captura
+✓ iara setor 13: vitória e progressão por body
+✓ iara setor 13: captura por tip em trilha longa
+✓ iara setor 13: captura única
+✓ iara setor 13: pergunta após captura
+✓ iara setor 13: vitória e progressão por tip
+✓ iara setor 14: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 14: captura por head em trilha longa
+✓ iara setor 14: captura única
+✓ iara setor 14: pergunta após captura
+✓ iara setor 14: vitória e progressão por head
+✓ iara setor 14: captura por body em trilha longa
+✓ iara setor 14: captura única
+✓ iara setor 14: pergunta após captura
+✓ iara setor 14: vitória e progressão por body
+✓ iara setor 14: captura por tip em trilha longa
+✓ iara setor 14: captura única
+✓ iara setor 14: pergunta após captura
+✓ iara setor 14: vitória e progressão por tip
+✓ iara setor 15: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 15: captura por head em trilha longa
+✓ iara setor 15: captura única
+✓ iara setor 15: pergunta após captura
+✓ iara setor 15: vitória e progressão por head
+✓ iara setor 15: captura por body em trilha longa
+✓ iara setor 15: captura única
+✓ iara setor 15: pergunta após captura
+✓ iara setor 15: vitória e progressão por body
+✓ iara setor 15: captura por tip em trilha longa
+✓ iara setor 15: captura única
+✓ iara setor 15: pergunta após captura
+✓ iara setor 15: vitória e progressão por tip
+✓ iara setor 16: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 16: captura por head em trilha longa
+✓ iara setor 16: captura única
+✓ iara setor 16: pergunta após captura
+✓ iara setor 16: vitória e progressão por head
+✓ iara setor 16: captura por body em trilha longa
+✓ iara setor 16: captura única
+✓ iara setor 16: pergunta após captura
+✓ iara setor 16: vitória e progressão por body
+✓ iara setor 16: captura por tip em trilha longa
+✓ iara setor 16: captura única
+✓ iara setor 16: pergunta após captura
+✓ iara setor 16: vitória e progressão por tip
+✓ iara setor 17: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 17: captura por head em trilha longa
+✓ iara setor 17: captura única
+✓ iara setor 17: pergunta após captura
+✓ iara setor 17: vitória e progressão por head
+✓ iara setor 17: captura por body em trilha longa
+✓ iara setor 17: captura única
+✓ iara setor 17: pergunta após captura
+✓ iara setor 17: vitória e progressão por body
+✓ iara setor 17: captura por tip em trilha longa
+✓ iara setor 17: captura única
+✓ iara setor 17: pergunta após captura
+✓ iara setor 17: vitória e progressão por tip
+✓ iara setor 18: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 18: captura por head em trilha longa
+✓ iara setor 18: captura única
+✓ iara setor 18: pergunta após captura
+✓ iara setor 18: vitória e progressão por head
+✓ iara setor 18: captura por body em trilha longa
+✓ iara setor 18: captura única
+✓ iara setor 18: pergunta após captura
+✓ iara setor 18: vitória e progressão por body
+✓ iara setor 18: captura por tip em trilha longa
+✓ iara setor 18: captura única
+✓ iara setor 18: pergunta após captura
+✓ iara setor 18: vitória e progressão por tip
+✓ iara setor 19: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 19: captura por head em trilha longa
+✓ iara setor 19: captura única
+✓ iara setor 19: pergunta após captura
+✓ iara setor 19: vitória e progressão por head
+✓ iara setor 19: captura por body em trilha longa
+✓ iara setor 19: captura única
+✓ iara setor 19: pergunta após captura
+✓ iara setor 19: vitória e progressão por body
+✓ iara setor 19: captura por tip em trilha longa
+✓ iara setor 19: captura única
+✓ iara setor 19: pergunta após captura
+✓ iara setor 19: vitória e progressão por tip
+✓ iara setor 20: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 20: captura por head em trilha longa
+✓ iara setor 20: captura única
+✓ iara setor 20: pergunta após captura
+✓ iara setor 20: vitória e progressão por head
+✓ iara setor 20: captura por body em trilha longa
+✓ iara setor 20: captura única
+✓ iara setor 20: pergunta após captura
+✓ iara setor 20: vitória e progressão por body
+✓ iara setor 20: captura por tip em trilha longa
+✓ iara setor 20: captura única
+✓ iara setor 20: pergunta após captura
+✓ iara setor 20: vitória e progressão por tip
+✓ iara setor 21: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 21: captura por head em trilha longa
+✓ iara setor 21: captura única
+✓ iara setor 21: pergunta após captura
+✓ iara setor 21: vitória e progressão por head
+✓ iara setor 21: captura por body em trilha longa
+✓ iara setor 21: captura única
+✓ iara setor 21: pergunta após captura
+✓ iara setor 21: vitória e progressão por body
+✓ iara setor 21: captura por tip em trilha longa
+✓ iara setor 21: captura única
+✓ iara setor 21: pergunta após captura
+✓ iara setor 21: vitória e progressão por tip
+✓ iara setor 22: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 22: captura por head em trilha longa
+✓ iara setor 22: captura única
+✓ iara setor 22: pergunta após captura
+✓ iara setor 22: vitória e progressão por head
+✓ iara setor 22: captura por body em trilha longa
+✓ iara setor 22: captura única
+✓ iara setor 22: pergunta após captura
+✓ iara setor 22: vitória e progressão por body
+✓ iara setor 22: captura por tip em trilha longa
+✓ iara setor 22: captura única
+✓ iara setor 22: pergunta após captura
+✓ iara setor 22: vitória e progressão por tip
+✓ iara setor 23: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 23: captura por head em trilha longa
+✓ iara setor 23: captura única
+✓ iara setor 23: pergunta após captura
+✓ iara setor 23: vitória e progressão por head
+✓ iara setor 23: captura por body em trilha longa
+✓ iara setor 23: captura única
+✓ iara setor 23: pergunta após captura
+✓ iara setor 23: vitória e progressão por body
+✓ iara setor 23: captura por tip em trilha longa
+✓ iara setor 23: captura única
+✓ iara setor 23: pergunta após captura
+✓ iara setor 23: vitória e progressão por tip
+✓ iara setor 24: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 24: captura por head em trilha longa
+✓ iara setor 24: captura única
+✓ iara setor 24: pergunta após captura
+✓ iara setor 24: vitória e progressão por head
+✓ iara setor 24: captura por body em trilha longa
+✓ iara setor 24: captura única
+✓ iara setor 24: pergunta após captura
+✓ iara setor 24: vitória e progressão por body
+✓ iara setor 24: captura por tip em trilha longa
+✓ iara setor 24: captura única
+✓ iara setor 24: pergunta após captura
+✓ iara setor 24: vitória e progressão por tip
+✓ iara setor 25: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 25: captura por head em trilha longa
+✓ iara setor 25: captura única
+✓ iara setor 25: pergunta após captura
+✓ iara setor 25: vitória e progressão por head
+✓ iara setor 25: captura por body em trilha longa
+✓ iara setor 25: captura única
+✓ iara setor 25: pergunta após captura
+✓ iara setor 25: vitória e progressão por body
+✓ iara setor 25: captura por tip em trilha longa
+✓ iara setor 25: captura única
+✓ iara setor 25: pergunta após captura
+✓ iara setor 25: vitória e progressão por tip
+✓ iara setor 26: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 26: captura por head em trilha longa
+✓ iara setor 26: captura única
+✓ iara setor 26: pergunta após captura
+✓ iara setor 26: vitória e progressão por head
+✓ iara setor 26: captura por body em trilha longa
+✓ iara setor 26: captura única
+✓ iara setor 26: pergunta após captura
+✓ iara setor 26: vitória e progressão por body
+✓ iara setor 26: captura por tip em trilha longa
+✓ iara setor 26: captura única
+✓ iara setor 26: pergunta após captura
+✓ iara setor 26: vitória e progressão por tip
+✓ iara setor 27: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 27: captura por head em trilha longa
+✓ iara setor 27: captura única
+✓ iara setor 27: pergunta após captura
+✓ iara setor 27: vitória e progressão por head
+✓ iara setor 27: captura por body em trilha longa
+✓ iara setor 27: captura única
+✓ iara setor 27: pergunta após captura
+✓ iara setor 27: vitória e progressão por body
+✓ iara setor 27: captura por tip em trilha longa
+✓ iara setor 27: captura única
+✓ iara setor 27: pergunta após captura
+✓ iara setor 27: vitória e progressão por tip
+✓ iara setor 28: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 28: captura por head em trilha longa
+✓ iara setor 28: captura única
+✓ iara setor 28: pergunta após captura
+✓ iara setor 28: vitória e progressão por head
+✓ iara setor 28: captura por body em trilha longa
+✓ iara setor 28: captura única
+✓ iara setor 28: pergunta após captura
+✓ iara setor 28: vitória e progressão por body
+✓ iara setor 28: captura por tip em trilha longa
+✓ iara setor 28: captura única
+✓ iara setor 28: pergunta após captura
+✓ iara setor 28: vitória e progressão por tip
+✓ iara setor 29: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 29: captura por head em trilha longa
+✓ iara setor 29: captura única
+✓ iara setor 29: pergunta após captura
+✓ iara setor 29: vitória e progressão por head
+✓ iara setor 29: captura por body em trilha longa
+✓ iara setor 29: captura única
+✓ iara setor 29: pergunta após captura
+✓ iara setor 29: vitória e progressão por body
+✓ iara setor 29: captura por tip em trilha longa
+✓ iara setor 29: captura única
+✓ iara setor 29: pergunta após captura
+✓ iara setor 29: vitória e progressão por tip
+✓ iara setor 30: todos os envelopes coletáveis, crescimento e efeitos preservados
+✓ iara setor 30: captura por head em trilha longa
+✓ iara setor 30: captura única
+✓ iara setor 30: pergunta após captura
+✓ iara setor 30: vitória e progressão por head
+✓ iara setor 30: captura por body em trilha longa
+✓ iara setor 30: captura única
+✓ iara setor 30: pergunta após captura
+✓ iara setor 30: vitória e progressão por body
+✓ iara setor 30: captura por tip em trilha longa
+✓ iara setor 30: captura única
+✓ iara setor 30: pergunta após captura
+✓ iara setor 30: vitória e progressão por tip
+✓ Espaço vazio dentro de uma curva não captura
+✓ Contato entre dois segmentos de cabelo captura
+✓ Varredura detecta cruzamento do cabelo entre frames
+✓ Pausa não captura
+✓ Não existe módulo de teletransporte
+✓ Envelope amarelo tem espessura dourada e dobras diagonais
+✓ WebGL inicializado
+✓ Resolução Baixo
+✓ Resolução Médio
+✓ Resolução Alto
+✓ Resolução Ultra
+✓ Câmera ortográfica verdadeira
+✓ Instâncias de vegetação presentes
+✓ Inclinação isométrica 35,264°
+✓ Mapa horizontal, profundidade 3D preservada
+✓ Sem erro de GPU
+✓ Água animada usa material próprio
+✓ Material de copas com transparência
+✓ Outro guardião renderiza sem erro WebGL
+✓ Preferências preservam o estado da missão
+✓ Evento de teclado real KeyA
+✓ Evento de teclado real KeyS
+✓ Evento de teclado real KeyZ
+✓ Evento de teclado real KeyW
+✓ Teclado real bloqueado em paused
+✓ Teclado real bloqueado em quiz
+✓ Quatro controles de toque correspondem ao teclado
+✓ Câmera WebGL fixa durante retorno
+✓ Câmera não salta após reinício do relógio
+✓ Predador pode surgir no cenário 3D
+✓ Dois modelos de vírus renderizam sem erro WebGL
+✓ Sem cargas ou módulo de teletransporte
+✓ Aviso de perseguição aparece
+✓ Alvo dentro da visão não é descartado pela janela antiga
+✓ Envelopes amarelos renderizados em WebGL
+✓ Cabelo muito longo renderiza todas as ligações sem limite de 512
+✓ Modelo do Fugitivo gerou instâncias
+✓ Modelo do Predador gerou instâncias
+{"passed":1678,"total":1678,"failed":[],"calls":116,"triangles":90086}</pre>
+
+
+</body></html>

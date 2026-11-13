@@ -1,0 +1,11 @@
+﻿<!doctype html><html lang="pt-BR"><meta charset="utf-8"><title>Inspeção da história 2D</title><link rel="stylesheet" href="../css/temple.css"><style>body{margin:0;background:#07131b;color:#e5e7eb;font:14px system-ui}main{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:12px}figure{margin:0;position:relative}img{width:100%;display:block}figcaption{padding:8px}.hope{position:absolute;inset:0 0 30px;display:grid;place-items:center;text-align:center;background:#000;color:silver;font:24px "Cinzel Decorative",serif}iframe{position:fixed;left:-2000px;width:960px;height:540px;border:0}</style><main></main><iframe src="../../index.html"></iframe><script>
+document.querySelector('iframe').onload=async e=>{
+ const w=e.target.contentWindow,B=w.Boitata;w.requestAnimationFrame=()=>0;const H=B.Story;
+ if(!await H.start({manual:true})){document.body.dataset.error=H.error;return;}
+ const time=new URLSearchParams(location.search).get('time');if(time!==null){e.target.style.cssText='position:fixed;inset:0;left:0;width:100vw;height:100vh;border:0';H.resize();H.renderAt(Number(time));document.body.dataset.ready='true';return;}
+ H.renderer.domElement.width=640;H.renderer.domElement.height=360;
+ for(const [time,title]of [[12,'1 · Sono no templo'],[23,'2 · A sombra'],[40,'3 · Iara penteando'],[52.5,'4 · O grito'],[72,'5 · Natação aérea'],[90,'6 · Sem fogo'],[103,'7 · O vírus'],[123,'8 · Perseguição'],[140,'9 · Esperança'],[154,'10 · Prisioneiras'],[165,'10 · Olhos azuis']]){
+  H.renderAt(time);const f=document.createElement('figure'),img=document.createElement('img'),caption=document.createElement('figcaption');img.src=H.renderer.domElement.toDataURL();caption.textContent=title;f.append(img,caption);if(time===140){const span=document.createElement('span');span.className='hope';span.textContent='Que o sistema seja salvo';f.append(span);}document.querySelector('main').append(f);
+ }
+ H.stop();document.body.dataset.ready='true';
+};</script></html>
