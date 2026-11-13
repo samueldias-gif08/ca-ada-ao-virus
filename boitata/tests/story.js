@@ -33,7 +33,7 @@ document.querySelector('iframe').onload=async event=>{
    approved.clearRect(0,0,640,640);flightRenderer.ctx.clearRect(0,0,640,640);
    flightRenderer.iara(430,350,.85,time,{mode:'swim',swim:1});
    approved.save();approved.translate(430,350);approved.scale(.85,.85);approved.translate(0,-200);
-   approved.drawImage(p.image,p.x,p.y,p.w,p.h,-.74*620,-.18*620,620,620);approved.restore();
+   approved.drawImage(p.image,p.x,p.y,p.w,p.h,-.74*620*p.w/p.h,-.18*620,620*p.w/p.h,620);approved.restore();
    const expected=approved.getImageData(0,0,640,640).data,actual=flightRenderer.ctx.getImageData(0,0,640,640).data;
    flightPixels&&=expected.every((value,index)=>value===actual[index]);
   }}finally{flightRenderer.dispose();}

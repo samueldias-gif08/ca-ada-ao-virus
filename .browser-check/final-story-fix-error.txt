@@ -1,0 +1,4 @@
+[1113/191236.467:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:108] CreateFile: Acesso negado. (0x5)
+[6140:12008:1113/191236.645:ERROR:chrome\installer\util\google_update_settings_win.cc:270] Failed opening key Software\Google\Update\ClientStateMedium\{8A69D345-D564-463c-AFF1-A69D9E530F96} to set usagestats; result: 5
+[6140:2172:1113/191236.649:FATAL:mojo\public\cpp\platform\platform_channel.cc:112] Check failed: . : Acesso negado. (0x5)
+[1113/191236.649:ERROR:third_party\crashpad\crashpad\client\crashpad_client_win.cc:145] crash server failed to launch, self-terminating

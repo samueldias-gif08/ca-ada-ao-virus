@@ -41,7 +41,7 @@
    const phase=t*(mode==='swim'?mix(1.2,4.6,swim):1.2);
    if(mode==='swim'){
     const frame=Math.floor(t*12)%12;
-    // The approved flight artwork, cadence, scale and registration are intact.
+    // Whole-body breaststroke cels include the tail kick and flowing hair.
     this.part('iara-swim','frame'+frame,0,-200,620,{ax:.74,ay:.18});
     c.restore();this.pose.iara={x,y,mode,expression,arms:[],tailPhase:phase,facing,animationFrame:frame,drawnCycle:true,wholeBody:true,bodyDraws:1,atlas:'iara-swim'};return;
    }
@@ -111,6 +111,7 @@
    if(impact){c.fillStyle='rgba(247,255,240,'+impact*.7+')';c.fillRect(0,0,1600,900);}c.restore();
   }
   render(time,scenes){
+   if(this.finalEnding)return this.renderFinal(time);
    const t=clamp(time,0,168),s=scenes.find(q=>t<q.start+q.duration)||scenes.at(-1),local=t-s.start,u=clamp(local/s.duration),c=this.ctx,canvas=this.domElement;
    this.info.frames++;this.info.sprites=this.info.warpedBands=0;this.pose={};
    c.setTransform(1,0,0,1,0,0);c.fillStyle='#000';c.fillRect(0,0,canvas.width,canvas.height);const ratio=Math.min(canvas.width/1600,canvas.height/900);this.viewport={scale:ratio,x:(canvas.width-1600*ratio)/2,y:(canvas.height-900*ratio)/2,width:1600,height:900};c.setTransform(ratio,0,0,ratio,this.viewport.x,this.viewport.y);c.save();c.beginPath();c.rect(0,0,1600,900);c.clip();
@@ -159,6 +160,12 @@
    this.fx(t,{fire,water,speed:flight,glitch,impact,light:day});c.restore();
    this.camera=cam;this.state={scene:s.id,index:s.index,time:t,local,black,fire,shadow,portal,flight,day,title,glitch,impact,poses:this.pose,artDraws:this.info.sprites};return this.state;
   }
-  dispose(){this.parts.clear();this.domElement.width=this.domElement.height=1;this.ctx=null;this.disposed=true;}
+  renderFinal(time){
+   const c=this.ctx,cv=this.domElement,t=Math.max(0,Math.min(10,time)),fade=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
+   c.setTransform(1,0,0,1,0,0);c.fillStyle='#000';c.fillRect(0,0,cv.width,cv.height);const r=Math.min(cv.width/1600,cv.height/900),ox=(cv.width-1600*r)/2,oy=(cv.height-900*r)/2;c.setTransform(r,0,0,r,ox,oy);c.save();
+   if(t<3.5){const a=fade(t/.7)*(1-fade((t-2.7)/.8));c.globalAlpha=a;c.fillStyle='#e5edf4';c.textAlign='center';c.textBaseline='middle';c.font='56px Marcellus,serif';c.fillText('Esse foi só o começo',800,450);c.globalAlpha=1;}
+   else{const cast=this.assets.image('final-folklore-cast'),sw=(cast.naturalWidth||cast.width)/3,sh=cast.naturalHeight||cast.height,reveal=fade((t-3.5)/1),zoom=1+fade((t-4.5)/5)*.12,fadeOut=1-fade((t-9.2)/.8);c.fillStyle='#000';c.fillRect(0,0,1600,900);const halo=c.createRadialGradient(800,425,20,800,425,620);halo.addColorStop(0,`rgba(18,29,44,${reveal*.7})`);halo.addColorStop(1,'rgba(0,0,0,0)');c.fillStyle=halo;c.fillRect(0,0,1600,900);for(let i=0;i<3;i++){const baseX=440+i*360,x=800+(baseX-800)*zoom,y=785+Math.sin(t*1.7+i*.7)*3*reveal,w=310*zoom,h=650*zoom;c.save();c.globalAlpha=reveal*fadeOut;c.drawImage(cast,i*sw,0,sw,sh,x-w/2,y-h,w,h);c.restore();}c.fillStyle=`rgba(0,0,0,${1-fadeOut})`;c.fillRect(0,0,1600,900);}
+   c.restore();return {scene:'final',index:0,time:t,local:t,black:t>9.5?1:0,title:0,poses:{},artDraws:this.info.sprites};
+  }  dispose(){this.parts.clear();this.domElement.width=this.domElement.height=1;this.ctx=null;this.disposed=true;}
  };
 })();

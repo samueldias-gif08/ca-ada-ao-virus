@@ -39,7 +39,8 @@
         ['JOGAR', () => this.play(), 'temple-play'],
         ['SELECIONAR SETOR', () => B.UI.selection()],
         ['CONFIGURAÇÕES', () => B.UI.settings()],
-        ['HISTÓRIA', () => B.Story.start(), 'temple-story']
+        ['HISTÓRIA', () => B.Story.start(), 'temple-story'],
+        ['HISTÓRIA FINAL', () => B.Story.start({final:true}), 'temple-story temple-final-story']
       ];
       for (const [label, action, className] of actions) {
         const button = document.createElement('button');
@@ -56,6 +57,11 @@
         root.querySelector('.temple-particles').append(particle);
       }
       root.querySelector('.temple-play').focus({preventScroll: true});
+    },
+    creditsLockedStory() {
+      B.UI.panel('HISTÓRIA FINAL BLOQUEADA', 'Ainda há mistérios na rede.',
+        '<p>Conclua o jogo para desbloquear a História Final</p>',
+        [['Voltar ao menu', () => this.open(), true]]);
     },
     play() {
       if (this.transition) return;

@@ -1,6 +1,6 @@
 # BOITATÁ — A Serpente Digital
 
-**Versão atual completa:** [boitata/index.html](boitata/index.html). O arquivo index.html desta pasta carrega o jogo completo diretamente, usando os recursos da pasta boitata. Consulte [boitata/README.md](boitata/README.md) para a arquitetura modular, chefe final, áudio, salvamento e resultados dos testes. Os arquivos originais desta pasta foram preservados como referência da primeira implementação; o texto abaixo descreve essa versão anterior.
+**Versão atual  smpleta:** [boitata/index.html](boitata/index.html). O arquivo index.html desta pasta carrega o jogo completo diretamente, usando os recursos da pasta boitata. Consulte [boitata/README.md](boitata/README.md) para a arquitetura modular, chefe final, áudio, salvamento e resultados dos testes. Os arquivos originais desta pasta foram preservados como referência da primeira implementação; o texto abaixo descreve essa versão anterior.
 
 Abra `index.html` em um navegador moderno. Não é preciso instalar dependências ou iniciar um servidor. Todos os recursos são locais; o jogo também funciona sem Internet.
 

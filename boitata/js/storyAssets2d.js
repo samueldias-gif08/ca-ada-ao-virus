@@ -2,7 +2,7 @@
 (() => {
  'use strict';const B=Boitata;
  B.StoryAssets2D={
-  backgrounds:['forest-night','temple','lagoon','forest-path','forest-day','laboratory'],
+  backgrounds:['forest-night','temple','lagoon','forest-path','forest-day','laboratory','final-folklore-cast'],
   atlases:['iara-atlas','boitata-atlas','cuca-atlas','loira-atlas','virus-atlas','foliage-atlas','iara-swim-atlas','iara-comb-atlas','iara-act-atlas','boitata-whole-atlas','captives-whole-atlas'],
   sprites:{
    iara:{torso:0,tail:1,hair:2,lock:3,upperL:4,lowerL:5,upperR:6,combHand:7,calm:8,fear:9,worried:10,determined:11,tailL:12,tailR:13,lowerR:14,comb:15},
@@ -28,9 +28,13 @@
       const img=new Image();images.set(name,img);img.decoding='async';
       img.onload=()=>{pending.delete(reject);if(cancelled)return reject(Error('Carregamento cancelado'));done++;progress(done,names.length);resolve(img);};
       img.onerror=()=>{pending.delete(reject);reject(Error('Não foi possível carregar assets/story2d/'+name+'.png'));};
-      const file=name==='boitata-whole-atlas'?'boitata-whole-head-small-atlas':name;
+      const file=name==='iara-swim-atlas'?'iara-air-swim-atlas':name==='boitata-whole-atlas'?'boitata-whole-head-small-atlas':name;
       img.src='assets/story2d/'+file+'.png';
      })));
+     // Remove the opaque white sheet background by flooding only near-white pixels
+     // connected to the outer edge. White costume details remain untouched.
+     const cast=images.get('final-folklore-cast');
+     if(cast){const cnv=document.createElement('canvas');cnv.width=cast.naturalWidth;cnv.height=cast.naturalHeight;const cx=cnv.getContext('2d',{willReadFrequently:true});cx.drawImage(cast,0,0);const im=cx.getImageData(0,0,cnv.width,cnv.height),d=im.data,w=cnv.width,h=cnv.height,n=w*h,seen=new Uint8Array(n),q=new Int32Array(n);let head=0,tail=0;const white=i=>{const p=i*4,r=d[p],g=d[p+1],b=d[p+2];return Math.min(r,g,b)>174&&Math.max(r,g,b)-Math.min(r,g,b)<38;};const seed=i=>{if(!seen[i]&&white(i)){seen[i]=1;q[tail++]=i;}};for(let x=0;x<w;x++){seed(x);seed((h-1)*w+x);}for(let y=0;y<h;y++){seed(y*w);seed(y*w+w-1);}while(head<tail){const i=q[head++],x=i%w,y=(i/w)|0;d[i*4+3]=0;if(x)seed(i-1);if(x<w-1)seed(i+1);if(y)seed(i-w);if(y<h-1)seed(i+w);}for(let i=0;i<n;i++){const k=i*4,r=d[k],g=d[k+1],b=d[k+2];if(Math.min(r,g,b)>198&&Math.max(r,g,b)-Math.min(r,g,b)<24)d[k+3]=0;}cx.putImageData(im,0,0);images.set('final-folklore-cast',cnv);}
      // Each source region contains a COMPLETE drawing. Registration is at the
      // forehead, never independently at neck, shoulders, waist or other joints.
      const layouts={
@@ -48,10 +52,19 @@
       }
       B.StoryAtlasBounds[atlas]={cells};
      }
+     // Expanded cells retain outstretched hands; isolate the complete cel from its neighbor.
+     const swimImage=images.get('iara-swim-atlas'),cw=swimImage.naturalWidth/4,ch=swimImage.naturalHeight/3;
+     for(let i=0;i<12;i++){
+      const x=Math.floor(i%4*cw),y=Math.floor(Math.floor(i/4)*ch),w=Math.min(Math.ceil(cw*1.11),swimImage.naturalWidth-x);
+      const cel=B.StoryAssets2D.extractWhole(swimImage,{x,y,w,h:Math.floor(ch)});
+      const canvas=document.createElement('canvas');canvas.width=Math.ceil(cw*1.11);canvas.height=Math.floor(ch);
+      canvas.getContext('2d').drawImage(cel.image,0,0);
+      wholeSprites.set('iara-swim/frame'+i,{image:canvas,x:0,y:0,w:canvas.width,h:canvas.height});
+     }
      for(const name of B.StoryAssets2D.atlases){const image=images.get(name),cells=B.StoryAtlasBounds?.[name]?.cells;if(!cells?.length||!cells.every(r=>r.x>=0&&r.y>=0&&r.w>1&&r.h>1&&r.x+r.w<=image.naturalWidth&&r.y+r.h<=image.naturalHeight))throw Error('Metadados do atlas ausentes ou inválidos: '+name);}
      return this;
     },
-    image(name){const image=images.get(name);if(!image?.complete||!image.naturalWidth)throw Error('Arte não carregada: '+name);return image;},
+    image(name){const image=images.get(name);if(!image||!(image.naturalWidth||image.width)||('complete'in image&&!image.complete))throw Error('Arte não carregada: '+name);return image;},
     sprite(character,part){
      const whole=wholeSprites.get(character+'/'+part);if(whole)return whole;
      const atlas=character==='foliage'?'foliage-atlas':character+'-atlas',index=B.StoryAssets2D.sprites[character][part],bounds=B.StoryAtlasBounds[atlas].cells[index];

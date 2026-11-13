@@ -21,9 +21,10 @@
   get currentTime(){return this.time;},
   get isPlaying(){return !!(this.active&&!this.loading&&this.renderer&&!this.paused&&!this.ended&&!this.scrubbing);},
   formatTime(seconds,forceHours=this.duration>=3600){const value=Math.max(0,Math.floor(Number(seconds)||0)),h=Math.floor(value/3600),m=Math.floor(value/60)%60,s=value%60;return (h||forceHours?String(h).padStart(2,'0')+':':'')+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');},
-  async start({manual=false}={}){
+ async start({manual=false,final=false}={}){
    if(this.active)return false;
-   Object.assign(this,{active:true,loading:true,paused:false,ended:false,scrubbing:false,manual,time:0,playbackRate:1,speedOpen:false,controlsHovered:false,keyboardInteraction:false,scrubPointer:null,error:null});
+   if(final){this.duration=10;this.scenes=[{id:'final',index:0,start:0,duration:10}];}
+   Object.assign(this,{active:true,loading:true,paused:false,ended:false,scrubbing:false,manual,final,time:0,playbackRate:1,speedOpen:false,controlsHovered:false,keyboardInteraction:false,scrubPointer:null,error:null});
    this.root=document.createElement('section');this.root.className='story-screen';this.root.tabIndex=-1;this.root.setAttribute('aria-label','História do BOITATÁ — anime 2D');
    this.root.innerHTML=`<canvas class="story-canvas" aria-label="Animação 2D da história do BOITATÁ"></canvas><div class="story-letterbox story-letterbox-top"></div><div class="story-letterbox story-letterbox-bottom"></div><div class="story-curtain" aria-hidden="true"></div><div class="story-hope" aria-hidden="true"><div class="story-dust"></div><span>Que o sistema seja salvo</span></div><div class="story-loading" role="status">Carregando a animação 2D…</div><div class="story-ended" hidden><button data-story="restart">${icons.replay}<span>REPRODUZIR NOVAMENTE</span></button></div><nav class="story-controls" aria-label="Controles da história"><div class="story-progress"><input class="story-seek" type="range" min="0" max="${this.duration}" step="0.01" value="0" aria-label="Posição da história" disabled><output class="story-time-preview" aria-hidden="true" hidden>00:00</output></div><div class="story-control-row"><button class="story-icon-button" data-story="pause" aria-label="Pausar" title="Pausar (Espaço ou K)" disabled>${icons.pause}</button><output class="story-time" aria-label="Tempo da história">00:00 / ${this.formatTime(this.duration)}</output><span class="story-control-spacer"></span><button class="story-text-button" data-story="skip">PULAR</button><button class="story-text-button" data-story="menu">VOLTAR AO MENU</button><div class="story-speed-control"><button data-story="speed" aria-label="Velocidade de reprodução: 1x" aria-haspopup="menu" aria-expanded="false" aria-controls="story-speed-options" disabled>1x <span aria-hidden="true">⌃</span></button><div class="story-speed-menu" id="story-speed-options" role="menu" aria-label="Velocidade de reprodução" hidden><span class="story-speed-heading">VELOCIDADE</span><button role="menuitemradio" data-rate="1" aria-checked="true"><span>1x</span> Normal</button><button role="menuitemradio" data-rate="1.4" aria-checked="false"><span>1.4x</span> Rápido</button><button role="menuitemradio" data-rate="2" aria-checked="false"><span>2x</span> Muito rápido</button></div></div><button class="story-icon-button" data-story="fullscreen" aria-label="Entrar em tela cheia" title="Tela cheia" disabled>${icons.fullscreen}</button></div><span class="story-player-status" role="status" aria-live="polite"></span></nav>`;
    B.TempleMenu.stop();B.S.phase='story';B.Movement.clear();document.body.append(this.root);document.body.classList.add('story-active');
@@ -52,6 +53,7 @@
     await session.load((done,total)=>{if(this.active&&this.assets===session)this.root.querySelector('.story-loading').textContent=done===total?'Preparando reprodução…':'Carregando a animação 2D… '+done+'/'+total;});
     if(!this.active||this.assets!==session)return false;
     this.renderer=new B.StoryRenderer2D(this.root.querySelector('canvas'),session);
+    this.renderer.finalEnding=!!final;
     this.loading=false;find('.story-loading').remove();for(const element of [this.playButton,this.seekInput,this.speedButton,this.fullscreenButton])element.disabled=false;
     this.resize();this.renderAt(0);this.last=performance.now();this.syncAudio();this.showControls();this.root.focus({preventScroll:true});sound.prepare(this.scenes,this.duration).then(()=>{if(this.active&&this.sound===sound)this.syncAudio();}).catch(error=>{if(this.active&&this.sound===sound){this.error=error.message;this.status.textContent='Áudio indisponível neste navegador.';}});return true;
    }catch(error){
@@ -94,6 +96,6 @@
    document.removeEventListener('keydown',this.keyHandler,true);document.removeEventListener('visibilitychange',this.visibilityHandler);document.removeEventListener('fullscreenchange',this.fullscreenHandler);window.removeEventListener('resize',this.resizeHandler);
    for(const name of ['sound','renderer','assets','root','controls','seekInput','timeOutput','tooltip','playButton','speedButton','speedMenu','fullscreenButton','endPanel','status','hope','curtain'])this[name]=null;this.error=null;
   },
-  stop(){if(!this.active)return;this.active=false;this.loading=false;this.paused=false;this.ended=false;this.scrubbing=false;this.cleanup();document.body.classList.remove('story-active');B.UI.menu();}
+  stop(){if(!this.active)return;const final=this.final;this.active=false;this.loading=false;this.paused=false;this.ended=false;this.scrubbing=false;this.cleanup();document.body.classList.remove('story-active');this.final=false;this.duration=168;this.scenes=scenes;B.UI.menu();}
  };
 })();

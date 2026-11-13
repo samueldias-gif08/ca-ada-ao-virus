@@ -1,0 +1,1 @@
+[3264:10460:1113/185217.045:ERROR:net\disk_cache\blockfile\block_files.cc:445] Failed to open C:\Users\Informática\Documents\Virus caçada\.browser-check\iara-air-swim-profile\ShaderCache\data_0
