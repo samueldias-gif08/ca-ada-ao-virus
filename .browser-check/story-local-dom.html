@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<base href="../">
+<title>História por arquivo local</title>
+</head><body data-result="passed"><pre id="results">358 quadros renderizados sem leitura de pixels: abertura e final.</pre><canvas width="1" height="1"></canvas>
+<script>window.Boitata={};</script>
+<script src="js/storyAtlasBounds.js"></script>
+<script src="js/storyAssets2d.js"></script>
+<script src="js/storyRenderer2d.js"></script>
+<script src="js/story.js"></script>
+<script>
+(async()=>{
+ const output=document.getElementById('results');
+ try{
+  // Fail if local playback attempts a canvas pixel read, even in permissive browsers.
+  if(location.protocol==='file:')CanvasRenderingContext2D.prototype.getImageData=function(){throw Error('Leitura de pixels bloqueada em arquivo local');};
+  const assets=Boitata.StoryAssets2D.create();await assets.load();
+  const renderer=new Boitata.StoryRenderer2D(document.querySelector('canvas'),assets);
+  let frames=0;
+  for(let t=0;t<=168;t+=.5){const state=renderer.render(t,Boitata.Story.scenes);if(!Number.isFinite(state.time))throw Error('Tempo inválido');frames++;}
+  renderer.finalEnding=true;
+  for(let t=0;t<=10;t+=.5){renderer.render(t);frames++;}
+  renderer.dispose();assets.release();
+  document.body.dataset.result='passed';output.textContent=frames+' quadros renderizados sem leitura de pixels: abertura e final.';
+ }catch(error){document.body.dataset.result='failed';output.textContent=error.stack;}
+})();
+</script>
+
+</body></html>

@@ -2,6 +2,7 @@
 (() => {
  'use strict';const B=Boitata;
  B.StoryAssets2D={
+  preparedRegistration:{"boitata-whole-frame4":{"regX":210,"regY":90,"wholeBody":true},"iara-swim-frame0":{},"iara-act-frame14":{"regX":245,"regY":39,"wholeBody":true},"boitata-whole-frame2":{"regX":210,"regY":90,"wholeBody":true},"iara-swim-frame11":{},"iara-act-frame7":{"regX":245,"regY":41,"wholeBody":true},"iara-swim-frame2":{},"iara-act-frame5":{"regX":245,"regY":41,"wholeBody":true},"boitata-whole-frame6":{"regX":210,"regY":90,"wholeBody":true},"captives-whole-frame1":{"regX":221.75,"regY":49.94369369369369,"wholeBody":true},"boitata-whole-frame7":{"regX":210,"regY":90,"wholeBody":true},"captives-whole-frame5":{"regX":221.75,"regY":49.94369369369369,"wholeBody":true},"iara-act-frame15":{"regX":245,"regY":39,"wholeBody":true},"boitata-whole-frame11":{"regX":320,"regY":110,"wholeBody":true},"boitata-whole-frame8":{"regX":320,"regY":110,"wholeBody":true},"iara-act-frame6":{"regX":245,"regY":41,"wholeBody":true},"boitata-whole-frame1":{"regX":210,"regY":90,"wholeBody":true},"iara-comb-frame10":{"regX":245,"regY":52,"wholeBody":true},"iara-swim-frame10":{},"iara-comb-frame7":{"regX":245,"regY":52,"wholeBody":true},"iara-comb-frame3":{"regX":245,"regY":52,"wholeBody":true},"iara-act-frame12":{"regX":245,"regY":39,"wholeBody":true},"captives-whole-frame4":{"regX":221.75,"regY":49.94369369369369,"wholeBody":true},"iara-swim-frame5":{},"iara-swim-frame1":{},"iara-swim-frame8":{},"iara-act-frame13":{"regX":245,"regY":39,"wholeBody":true},"iara-act-frame4":{"regX":245,"regY":41,"wholeBody":true},"iara-swim-frame6":{},"iara-comb-frame6":{"regX":245,"regY":52,"wholeBody":true},"iara-act-frame3":{"regX":245,"regY":55,"wholeBody":true},"iara-act-frame1":{"regX":245,"regY":55,"wholeBody":true},"iara-comb-frame2":{"regX":245,"regY":52,"wholeBody":true},"captives-whole-frame0":{"regX":221.75,"regY":49.94369369369369,"wholeBody":true},"iara-swim-frame3":{},"boitata-whole-frame0":{"regX":210,"regY":90,"wholeBody":true},"iara-comb-frame9":{"regX":245,"regY":52,"wholeBody":true},"boitata-whole-frame10":{"regX":320,"regY":110,"wholeBody":true},"iara-act-frame2":{"regX":245,"regY":55,"wholeBody":true},"captives-whole-frame3":{"regX":221.75,"regY":49.94369369369369,"wholeBody":true},"iara-act-frame10":{"regX":245,"regY":47,"wholeBody":true},"iara-comb-frame1":{"regX":245,"regY":52,"wholeBody":true},"captives-whole-frame7":{"regX":221.75,"regY":49.94369369369369,"wholeBody":true},"iara-comb-frame11":{"regX":245,"regY":52,"wholeBody":true},"iara-act-frame11":{"regX":245,"regY":47,"wholeBody":true},"iara-swim-frame4":{},"boitata-whole-frame3":{"regX":210,"regY":90,"wholeBody":true},"boitata-whole-frame9":{"regX":320,"regY":110,"wholeBody":true},"iara-swim-frame9":{},"iara-comb-frame4":{"regX":245,"regY":52,"wholeBody":true},"iara-act-frame0":{"regX":245,"regY":55,"wholeBody":true},"iara-act-frame9":{"regX":245,"regY":47,"wholeBody":true},"boitata-whole-frame5":{"regX":210,"regY":90,"wholeBody":true},"iara-comb-frame5":{"regX":245,"regY":52,"wholeBody":true},"iara-comb-frame0":{"regX":245,"regY":52,"wholeBody":true},"iara-comb-frame8":{"regX":245,"regY":52,"wholeBody":true},"captives-whole-frame2":{"regX":221.75,"regY":49.94369369369369,"wholeBody":true},"iara-swim-frame7":{},"captives-whole-frame6":{"regX":221.75,"regY":49.94369369369369,"wholeBody":true},"iara-act-frame8":{"regX":245,"regY":47,"wholeBody":true}},
   backgrounds:['forest-night','temple','lagoon','forest-path','forest-day','laboratory','final-folklore-cast'],
   atlases:['iara-atlas','boitata-atlas','cuca-atlas','loira-atlas','virus-atlas','foliage-atlas','iara-swim-atlas','iara-comb-atlas','iara-act-atlas','boitata-whole-atlas','captives-whole-atlas'],
   sprites:{
@@ -18,7 +19,11 @@
    foliage:{nightL:0,nightR:1,nightTop:2,nightBottom:3,dayL:4,dayR:5,dayTop:6,dayBottom:7}
   },
   create(){
+   const local=location.protocol==='file:',prepared=['iara-comb','iara-act','boitata-whole','captives-whole','iara-swim'];
    const names=[...this.backgrounds,...this.atlases],images=new Map(),pending=new Set(),wholeSprites=new Map();let cancelled=false;
+   // Local files may be drawn, but browsers forbid reading their canvas pixels.
+   // Use the same isolated cels, prepared ahead of time, for offline playback.
+   if(local)for(const character of prepared)for(const part of Object.keys(this.sprites[character]))names.push(character+'-'+part);
    return {
     images,
     async load(progress=()=>{}){
@@ -29,8 +34,15 @@
       img.onload=()=>{pending.delete(reject);if(cancelled)return reject(Error('Carregamento cancelado'));done++;progress(done,names.length);resolve(img);};
       img.onerror=()=>{pending.delete(reject);reject(Error('Não foi possível carregar assets/story2d/'+name+'.png'));};
       const file=name==='iara-swim-atlas'?'iara-air-swim-atlas':name==='boitata-whole-atlas'?'boitata-whole-head-small-atlas':name;
-      img.src='assets/story2d/'+file+'.png';
+      img.src='assets/story2d/'+(local&&name==='final-folklore-cast'?'prepared/final-folklore-cast-clean':local&&/-frame\d+$/.test(name)?'prepared/'+name:file)+'.png';
      })));
+     if(local){
+      for(const character of prepared)for(const part of Object.keys(B.StoryAssets2D.sprites[character])){
+       const image=images.get(character+'-'+part),registration=B.StoryAssets2D.preparedRegistration[character+'-'+part];
+       wholeSprites.set(character+'/'+part,{image,x:0,y:0,w:image.naturalWidth,h:image.naturalHeight,...registration});
+      }
+      return this;
+     }
      // Remove the opaque white sheet background by flooding only near-white pixels
      // connected to the outer edge. White costume details remain untouched.
      const cast=images.get('final-folklore-cast');
